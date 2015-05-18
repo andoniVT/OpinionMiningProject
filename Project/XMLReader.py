@@ -40,7 +40,15 @@ class Reader(object):
         return dictionary
     
     def __readType2(self):
-        pass
+        tree = ET.parse(self.__file)
+        root = tree.getroot()
+        iter = root.getiterator()
+        dictionary = []
+        for element in iter:
+            #print element.tag , element.attrib
+            print element
+                #dictionary.append(content)                                        
+        return dictionary
     
     def __readType3(self):
         tree = ET.parse(self.__file)
@@ -71,9 +79,9 @@ class Reader(object):
         
 if __name__ == '__main__':
 
-    obj = Reader(corpus_test2 , 4)
+    obj = Reader(corpus_train2 , 2)
     comentarios = obj.get_comments()
-    print comentarios[1]
+    #print comentarios[1]
     #for i in comentarios:
     #    print i 
     '''
