@@ -6,7 +6,7 @@ Created on 18/5/2015
 
 import elementtree.ElementTree as ET
 from elementtree.ElementTree import ElementTree
-from Settings import corpus_train1 , corpus_train2 
+from Settings import corpus_train1 , corpus_train2 , corpus_test1 , corpus_test2 
 
 class Reader(object):
     
@@ -43,10 +43,24 @@ class Reader(object):
         pass
     
     def __readType3(self):
-        pass
-    
+        tree = ET.parse(self.__file)
+        root = tree.getroot()
+        dictionary = []
+        for child in root:
+            content = child[2].text            
+            dictionary.append(content)          
+        return dictionary
+            
     def __readType4(self):
-        pass
+        tree = ET.parse(self.__file)
+        root = tree.getroot()
+        iter = root.getiterator()
+        dictionary = []
+        for element in iter:
+            if element.text:
+                content = element.text 
+                dictionary.append(content)                                        
+        return dictionary
     
     def __readType5(self):
         pass
@@ -57,8 +71,13 @@ class Reader(object):
         
 if __name__ == '__main__':
 
-    obj = Reader(corpus_train1 , 1)
+    obj = Reader(corpus_test2 , 4)
+    comentarios = obj.get_comments()
+    print comentarios[1]
+    #for i in comentarios:
+    #    print i 
+    '''
     comentarios = obj.get_comments()
     for i in comentarios.items():
-        print i 
-
+        print i
+    ''' 
