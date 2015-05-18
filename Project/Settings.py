@@ -8,3 +8,12 @@ Created on 15/5/2015
 big_text =  'Resource/big2.txt'
 stop_words = 'Resource/stopwords_spanish.txt'
 
+''' corpus '''
+corpus_train1 = "Data/general-tweets-train-tagged.xml"
+corpus_train2 = "Data/socialtv-tweets-train-tagged.xml"
+
+corpus_test1 = "Data/general-tweets-test1k.xml"
+corpus_test2 = "socialtv-tweets-test.xml"
+
+
+
