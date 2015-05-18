@@ -14,6 +14,7 @@ corpus_train2 = "Data/socialtv-tweets-train-tagged.xml"
 
 corpus_test1 = "Data/general-tweets-test1k.xml"
 corpus_test2 = "Data/socialtv-tweets-test.xml"
+corpus_test3 = "Data/general-tweets-test.xml"
 
 
 
