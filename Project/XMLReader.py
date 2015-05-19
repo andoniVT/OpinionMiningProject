@@ -31,14 +31,15 @@ class Reader(object):
             
     def __readType1(self):
         tree = ET.parse(self.__file)
-        root = tree.getroot()
-        dictionary = {}
+        root = tree.getroot()        
+        dictionary = []        
         for child in root:
             content = child[2].text
             polarity = child[5][0][0].text
-            dictionary[content] = polarity          
+            values = (content , polarity)
+            dictionary.append(values)                
         return dictionary
-    
+        
     def __readType2(self):
         tree = ET.parse(self.__file)
         root = tree.getroot()
