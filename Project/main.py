@@ -4,9 +4,11 @@ Created on 15/5/2015
 @email: andoni.valverde@ucsp.edu.pe
 '''
 from XMLReader import Reader
+from XMLWritter import Writter
 from TextCleaner import TextCleaner
 from Settings import corpus_train1 as train1 , corpus_train2 as train2   
 from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3
+from Settings import  pcorpus_train1 as ptrain1
 
 class Manager(object):
     
@@ -40,13 +42,10 @@ if __name__ == '__main__':
     
     obj = Manager()    
     corpus = obj.getData()
-    comments = corpus[0]
-    labels = corpus[1]
     
-    for i in comments:
-        print i 
-    for i in labels:
-        print i,
+    writ = Writter(corpus)
+    writ.write(ptrain1) 
+    
     
     
   

@@ -21,11 +21,11 @@ class Writter(object):
             value = self.__labels[i]
             comment = ET.SubElement(root , "comment")
             comment_id = ET.SubElement(comment , "id")
-            comment_id.text = str(id)
+            comment_id.text = str(id) 
             content = ET.SubElement(comment , "content")
-            content.text = key
+            content.text = key 
             polarity = ET.SubElement(comment , "polarity")  
-            polarity.text = value
+            polarity.text = value 
             id+=1
             print key , value
         tree = ET.ElementTree(root)
