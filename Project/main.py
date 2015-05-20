@@ -1,7 +1,7 @@
 '''
 Created on 15/5/2015
-
-@author: ucsp
+@author: Jorge Andoni Valverde Tohalino
+@email: andoni.valverde@ucsp.edu.pe
 '''
 from XMLReader import Reader
 from TextCleaner import TextCleaner

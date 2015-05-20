@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*- 
 '''
 Created on 15/5/2015
-
-@author: ucsp
+@author: Jorge Andoni Valverde Tohalino
+@email: andoni.valverde@ucsp.edu.pe
 '''
 import sys  
 reload(sys)  

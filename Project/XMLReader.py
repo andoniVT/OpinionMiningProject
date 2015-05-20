@@ -1,7 +1,7 @@
 '''
 Created on 18/5/2015
-
-@author: ucsp
+@author: Jorge Andoni Valverde Tohalino
+@email: andoni.valverde@ucsp.edu.pe
 '''
 
 import elementtree.ElementTree as ET
