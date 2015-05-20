@@ -32,6 +32,11 @@ class TextCleaner(object):
         word= word.replace("í", "i") 
         word= word.replace("ó", "o")
         word= word.replace("ú", "u")
+        word= word.replace("à", "a")
+        word= word.replace("è", "e")
+        word= word.replace("ì", "i") 
+        word= word.replace("ó", "o")
+        word= word.replace("ú", "u")
         word= word.replace("ä", "a")
         word= word.replace("ë", "e")
         word= word.replace("ï", "i")
@@ -42,6 +47,11 @@ class TextCleaner(object):
         word= word.replace("Í", "i") 
         word= word.replace("Ó", "o")
         word= word.replace("Ú", "u")
+        word= word.replace("À", "a")
+        word= word.replace("È", "e")
+        word= word.replace("Ì", "i") 
+        word= word.replace("Ò", "o")
+        word= word.replace("Ù", "u")
         word= word.replace("Ñ", "N")
         word= word.replace("ñ", "n")
         return word 
@@ -125,23 +135,23 @@ class TextCleaner(object):
         return " ".join(text_list)
         
     def process_comment(self , comentario):
-        comentario = self.remove_accent(comentario)
-        comentario = comentario.strip('RT')
+        comentario = comentario.strip('RT')        
+        comentario = self.remove_accent(comentario)        
         comentario = comentario.lower()
         comentario = re.sub('((www\.[\s]+)|(https?://[^\s]+))','',comentario) 
         comentario = re.sub('@[^\s]+','',comentario) 
         comentario = re.sub('[\s]+', ' ', comentario)
         comentario = self.processHashTag(comentario)
         comentario = comentario.strip('\'"')
-        signos = ['$' , '1' , '2'  , '4' , '5' , '6' , '7' , '8' , '9' , '0' '¿' , '¡' , ',' , '”']
+        signos = ['$' , '1' , '2'  , '3' ,  '4' , '5' , '6' , '7' , '8' , '9' , '0' '¿' , '¡' , ',' , '”' , '“' , '«' , '»']
         
         for c in signos:
             comentario = comentario.replace(c , "")
         
         predicate = lambda x:x not in string.punctuation
         comentario  = filter(predicate, comentario)
-            
-        
+
+                            
         pattern = re.compile(r"(.)\1{1,}", re.DOTALL)
         if self.__flag:
             comentario = self.remove_stop_word(comentario)
@@ -149,9 +159,9 @@ class TextCleaner(object):
         if len(result) == 0:
             return "None!"
         else:
-            return self.lemmatized_comment(result)
-            #return result 
-    
+            comentario = re.sub('\W+',' ', result)
+            return self.lemmatized_comment(comentario)            
+                
     def remove_punctuation_marks(self , word):
         """ Elimina los signos de puntuacion de un texto """
         if re.match("^[a-z0-9\xE1\xE9\xED\xF3\xFA\xF1]+$", word):

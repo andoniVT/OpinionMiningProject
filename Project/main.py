@@ -43,21 +43,13 @@ if __name__ == '__main__':
     comments = corpus[0]
     labels = corpus[1]
     
-    print len(comments)
-    print len(labels)
+    for i in comments:
+        print i 
+    for i in labels:
+        print i,
+    
+    
+  
     
     
         
-    '''
-    for i in corpus:         
-        if i is not None:
-            proc = TextCleaner(i)
-            texto_procesado = proc.get_processed_comment()
-            if texto_procesado == "None!":
-                print "Nonee" + " -> " + i
-            else:  
-                print texto_procesado
-    '''
-         
-    
-    
