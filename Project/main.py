@@ -13,7 +13,7 @@ from Settings import  pcorpus_train1 as ptrain1
 class Manager(object):
     
     def __init__(self):
-        self.__train_data = self.readTrainData()
+        self.__train_data = self.obtainTrainData()
     
     def readTrainData(self):
         comments = []
@@ -34,6 +34,20 @@ class Manager(object):
                         labels.append(i[1])
         return [comments , labels]   
     
+    def obtainTrainData(self):
+        flag = True
+        if flag:
+            all_comments =  self.readTrainData()
+            writ = Writter(all_comments)
+            writ.write(ptrain1)
+            obj = Reader(ptrain1 , 6)
+            comentarios = obj.get_comments()
+            return comentarios
+        else:
+            obj = Reader(ptrain1 , 6)
+            comentarios = obj.get_comments()
+            return comentarios 
+    
     def getData(self):
         return self.__train_data
 
@@ -47,7 +61,7 @@ if __name__ == '__main__':
     writ.write(ptrain1) 
     
     
-    
+  
   
     
     
