@@ -8,6 +8,7 @@ from scipy import spatial
 import math
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
+from Utils import compress , expand
 
 
 class VectorModel(object):
@@ -32,11 +33,8 @@ class VectorModel(object):
         self.__vectorizer = vectorizer
         self.__transformer = transformer
         
-    def get_comment_frequency_vector(self, comments):
-        vec_comments = []
-        for i in comments:
-            vec_comments.append(i)
-        vectores = self.__vectorizer.transform(vec_comments).toarray()
+    def get_comment_frequency_vector(self, comments):        
+        vectores = self.__vectorizer.transform(comments).toarray()
         return vectores 
     
     def get_comment_tf_idf_vector(self, comments):
@@ -46,4 +44,20 @@ class VectorModel(object):
 
 if __name__ == '__main__':
     
-    print "hello"
+    c1 = "vandal arranc nuev lapiz picass"
+    c2 = "ojal espan igual rt brasil necesit diplom ejerc period"
+    c3 = "vam chilen ultim esfuerz banc qued logr teleton necesit"
+    c4 = "buen dias mil graci rt buen dia concejal favorit"
+    c5 = "tap leid licenci histori contemporane mast integracion europeav ironi"
+    comments = [c1, c2, c3, c4, c5]
+    
+    obj = VectorModel(comments)
+    obj.prepare_models()
+    
+    res = obj.get_comment_tf_idf_vector(["tap leid" , "buen dias"])
+    print res[0]
+    vec1 = compress(res[0])
+    print vec1
+    
+    vec =expand(vec1)
+    print vec 
