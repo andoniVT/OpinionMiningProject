@@ -27,7 +27,7 @@ allModelTFIDF = "Models/all/tfidfModel.pk1"
 
 ''' classifiers '''
 allSVM = "Classifiers/all/SVM.pk1"
-allNB = "Classifiers/all/SVM.pk1"
+allNB = "Classifiers/all/NB.pk1"
 allME = "Classifiers/all/ME.pk1"
 allDT = "Classifiers/all/DT.pk1"
 

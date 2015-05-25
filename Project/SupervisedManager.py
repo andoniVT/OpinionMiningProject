@@ -84,13 +84,14 @@ class Manager(object):
         labels = []
         for i in self.__trainData:
             labels.append(i[1])
+            
+        fileClassifiers = [allSVM, allNB, allME, allDT]
         
+        for i in range(4):            
+            classifier = SC(data_expanded, labels, i+1)
+            fClass = classifier.train()                                 
+            write_data_to_disk(fileClassifiers[i], fClass)
         
-        
-        classifier = SC(data_expanded, labels, 1)
-        fClass = classifier.train()
-        
-        write_data_to_disk(allSVM, fClass)
         
         
 

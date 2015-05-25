@@ -1,1 +1,4 @@
 Training Support Vector Machine
+Training Naive Bayes
+Training Max Entropy
+Training Decision Tree
