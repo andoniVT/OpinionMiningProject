@@ -10,6 +10,8 @@ from Settings import corpus_train1 as train1 , corpus_train2 as train2
 from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3
 from Settings import  pcorpus_train1 as ptrain1
 from Settings import allVectorizer, allVectorizerTFIDF, allModelTFIDF 
+from Settings import allSVM, allNB, allME, allDT 
+from Utils import compress , expand
 from VectorModel import VectorModel as VM
 from Classifier import SupervisedClassifier as SC
 from Utils import write_data_to_disk , load_data_from_disk
@@ -69,14 +71,31 @@ class Manager(object):
         
         modelTFIDF = vectorModelData[2]
         write_data_to_disk(allModelTFIDF, modelTFIDF)
+                
+                    
+    def trainClassifiersFirstStage(self):
+        data = load_data_from_disk(allModelTFIDF)
+        data_expanded = []
+        for i in data:
+            vec =  expand(i)
+            data_expanded.append(vec)
         
-        loaded = load_data_from_disk(allModelTFIDF)
-        for i in loaded:
-            print i 
+                
+        labels = []
+        for i in self.__trainData:
+            labels.append(i[1])
+        
+        
+        
+        classifier = SC(data_expanded, labels, 1)
+        fClass = classifier.train()
+        
+        write_data_to_disk(allSVM, fClass)
+        
         
 
 
 if __name__ == '__main__':
     
     obj = Manager()
-    obj.prepareModelsFirstStage()
+    obj.trainClassifiersFirstStage()

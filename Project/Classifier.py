@@ -19,13 +19,13 @@ class SupervisedClassifier(object):
     
     def train(self):
         if self.__type == 1:
-            self.__trainSVM()
+            return self.__trainSVM()
         elif self.__type == 2:
-            self.__trainNB()
+            return self.__trainNB()
         elif self.__type == 3:
-            self.__trainME()
+            return self.__trainME()
         else:
-            self.__trainDT()
+            return self.__trainDT()
     
     def __trainSVM(self):
         print "Training Support Vector Machine"
