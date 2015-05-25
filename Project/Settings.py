@@ -21,7 +21,9 @@ pcorpus_train1 = "Data/general-tweets-train-tagged-proccesed.xml"
 
 
 ''' vector model '''
-
+allVectorizer = "Models/all/simpleVectorizer.pk1"
+allVectorizerTFIDF = "Models/all/tfidfVectorizer.pk1"
+allModelTFIDF = "Models/all/tfidfModel.pk1" 
 
 
 

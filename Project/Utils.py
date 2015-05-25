@@ -5,6 +5,7 @@ Created on 22/5/2015
 '''
 from _dbus_bindings import Array
 from array import array
+import cPickle
 
 def compress(vector):
     result = {}
@@ -26,6 +27,15 @@ def expand(vector):
         else:
             result.append(0)
     return result
+
+def write_data_to_disk(file, data):
+    with open(file, 'wb') as fid:
+        cPickle.dump(data, fid)
+
+def load_data_from_disk(file):
+    with open(file, 'rb') as fid:
+        data = cPickle.load(fid)
+    return data  
      
     
 

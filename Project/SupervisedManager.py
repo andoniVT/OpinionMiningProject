@@ -9,8 +9,10 @@ from TextCleaner import TextCleaner
 from Settings import corpus_train1 as train1 , corpus_train2 as train2   
 from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3
 from Settings import  pcorpus_train1 as ptrain1
+from Settings import allVectorizer, allVectorizerTFIDF, allModelTFIDF 
 from VectorModel import VectorModel as VM
 from Classifier import SupervisedClassifier as SC
+from Utils import write_data_to_disk , load_data_from_disk
 import os.path
 
 class Manager(object):
@@ -63,7 +65,15 @@ class Manager(object):
             train_comments.append(i[0])
         
         model = VM(train_comments)
-        model.prepare_models()
+        vectorModelData = model.prepare_models()
+        
+        modelTFIDF = vectorModelData[2]
+        write_data_to_disk(allModelTFIDF, modelTFIDF)
+        
+        loaded = load_data_from_disk(allModelTFIDF)
+        for i in loaded:
+            print i 
+        
 
 
 if __name__ == '__main__':
