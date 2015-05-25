@@ -9,14 +9,15 @@ from TextCleaner import TextCleaner
 from Settings import corpus_train1 as train1 , corpus_train2 as train2   
 from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3
 from Settings import  pcorpus_train1 as ptrain1
+from VectorModel import VectorModel as VM
+from Classifier import SupervisedClassifier as SC
 import os.path
 
 class Manager(object):
     
     def __init__(self):
-        self.__trainData = self.getTrainData()
+        self.__trainData = self.getTrainData()        
         
-    
     def getTrainData(self):
         flag = os.path.isfile(ptrain1)
         if flag:        
@@ -55,9 +56,17 @@ class Manager(object):
         obj = Reader(ptrain1 , 6)
         comentarios = obj.get_comments()
         return comentarios  
-
+    
+    def prepareModelsFirstStage(self):
+        train_comments = []
+        for i in self.__trainData:
+            train_comments.append(i[0])
+        
+        model = VM(train_comments)
+        model.prepare_models()
 
 
 if __name__ == '__main__':
     
     obj = Manager()
+    obj.prepareModelsFirstStage()

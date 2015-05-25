@@ -22,12 +22,18 @@ class VectorModel(object):
     
     def prepare_models(self):
         self.__vectorizer = CountVectorizer()
-        vector = self.__vectorizer.fit_transform(self.__data)
+        vector = self.__vectorizer.fit_transform(self.__data)        
         self.__corpus = vector.toarray()
-        self.__transformer = TfidfTransformer()
-        tfidf = self.__transformer.fit_transform(self.__corpus)
-        self.__corpus_tf_idf = tfidf.toarray()
-        return [self.__vectorizer, self.__corpus, self.__transformer, self.__corpus_tf_idf]
+        self.__transformer = TfidfTransformer()        
+        tfidf = self.__transformer.fit_transform(self.__corpus)        
+        self.__corpus_tf_idf = tfidf.toarray()        
+        self.__compressed = []
+        for i in self.__corpus_tf_idf:
+            vec = compress(i)            
+            self.__compressed.append(vec)
+        for i in self.__compressed:
+            print i 
+        return [self.__vectorizer, self.__transformer, self.__compressed]
     
     def set_models(self, vectorizer, transformer):
         self.__vectorizer = vectorizer

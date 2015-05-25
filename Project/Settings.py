@@ -20,4 +20,8 @@ corpus_test3 = "Data/general-tweets-test.xml"
 pcorpus_train1 = "Data/general-tweets-train-tagged-proccesed.xml"
 
 
+''' vector model '''
+
+
+
 
