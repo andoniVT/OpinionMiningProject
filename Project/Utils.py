@@ -6,6 +6,7 @@ Created on 22/5/2015
 from _dbus_bindings import Array
 from array import array
 import cPickle
+testFile = "testFile.txt"
 
 def compress(vector):
     result = {}
@@ -36,10 +37,22 @@ def load_data_from_disk(file):
     with open(file, 'rb') as fid:
         data = cPickle.load(fid)
     return data  
+
+def parse_file(file):
+    lines = []
+    with open(file) as f:
+        content = f.readlines()
+        for i in content:
+            lines.append(i)
+    
+    for i in lines:
+        print i
+    
+
      
     
 
 
 if __name__ == '__main__':
     
-    print "hello"
+    parse_file(testFile)

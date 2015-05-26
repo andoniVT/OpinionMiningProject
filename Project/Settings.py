@@ -31,5 +31,8 @@ allNB = "Classifiers/all/NB.pk1"
 allME = "Classifiers/all/ME.pk1"
 allDT = "Classifiers/all/DT.pk1"
 
+''' results '''
+firstResults = "Results/firstStage/results.txt"
+
 
 
