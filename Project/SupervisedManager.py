@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 '''
 Created on 25/5/2015
 @author: Jorge Andoni Valverde Tohalino
@@ -69,7 +71,11 @@ class Manager(object):
         model = VM(train_comments)
         vectorModelData = model.prepare_models()
         
+        modelVectorizer = vectorModelData[0]
+        modelVectorizerTFIDF = vectorModelData[1]
         modelTFIDF = vectorModelData[2]
+        write_data_to_disk(allVectorizer, modelVectorizer)
+        write_data_to_disk(allVectorizerTFIDF, modelVectorizerTFIDF)
         write_data_to_disk(allModelTFIDF, modelTFIDF)
                 
                     
@@ -91,7 +97,29 @@ class Manager(object):
             classifier = SC(data_expanded, labels, i+1)
             fClass = classifier.train()                                 
             write_data_to_disk(fileClassifiers[i], fClass)
+    
+    def testClassifiersFirstStage(self, test_data):
+        cleaner = TextCleaner(test_data[5])
+        procesado =  cleaner.get_processed_comment()
         
+        vectorizer = load_data_from_disk(allVectorizer)
+        transformer = load_data_from_disk(allVectorizerTFIDF)
+        model = VM()
+        model.set_models(vectorizer, transformer)
+        vector = model.get_comment_tf_idf_vector([procesado])
+        vec_comp = compress(vector[0])
+        print vec_comp
+        
+        
+        fileClassifiers = [allSVM, allNB, allME, allDT]
+        for i in fileClassifiers:                    
+            supClass = load_data_from_disk(i)        
+            classifier = SC()
+            classifier.set_classifier(supClass)
+        
+            result = classifier.classify(vector)
+            print result[0]
+            
         
         
 
@@ -99,4 +127,9 @@ class Manager(object):
 if __name__ == '__main__':
     
     obj = Manager()
-    obj.trainClassifiersFirstStage()
+    test = ["Altozano tras la presentación de su libro 101 españoles y Dios. Divertido, emocionante y brillante." , "Mañana en Gaceta: TVE, la que pagamos tú y yo, culpa a una becaria de su falsa información sobre el cierre de @gaceta" , "Más mañana en Gaceta. Amaiur depende de Uxue Barkos para crear grupo propio. ERC no cumple el req. del 15% y el PNV no quiere competencia", "Dado q la deuda privada es superior a la publica, el recorte del gasto privado tiene q ser superior al del gasto publico. Xq nadie protesta?", "Portada El Mundo http://t.co/3EZnkcyL ...", "Tras un año, constato: a las 7 d la mañana, cuando paseo a la perra x mi barrio, 8 d cada 10 personas con las q me cruzo, son mujeres."]
+    obj.testClassifiersFirstStage(test)
+    
+    
+    
+    #obj.prepareModelsFirstStage()
