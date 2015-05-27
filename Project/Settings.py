@@ -19,6 +19,10 @@ corpus_test3 = "Data/general-tweets-test.xml"
 ''' corpus proccesed '''
 pcorpus_train1 = "Data/general-tweets-train-tagged-proccesed.xml"
 
+''' corpus manual labeled'''
+labeled = "Data/manual-label-general-tweets-test1k.txt"
+labeled2 = "Data/manual-label-general-tweets-test1k-500.txt"
+
 
 ''' vector model '''
 allVectorizer = "Models/all/simpleVectorizer.pk1"
@@ -30,6 +34,10 @@ allSVM = "Classifiers/all/SVM.pk1"
 allNB = "Classifiers/all/NB.pk1"
 allME = "Classifiers/all/ME.pk1"
 allDT = "Classifiers/all/DT.pk1"
+
+
+
+
 
 ''' results '''
 firstResults = "Results/firstStage/results.txt"

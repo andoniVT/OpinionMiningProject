@@ -9,11 +9,11 @@ from XMLReader import Reader
 from XMLWritter import Writter
 from TextCleaner import TextCleaner
 from Settings import corpus_train1 as train1 , corpus_train2 as train2   
-from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3
+from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3 , labeled2
 from Settings import  pcorpus_train1 as ptrain1
 from Settings import allVectorizer, allVectorizerTFIDF, allModelTFIDF 
 from Settings import allSVM, allNB, allME, allDT 
-from Utils import compress , expand
+from Utils import compress , expand , get_polarity_from_file , show_classification_report
 from VectorModel import VectorModel as VM
 from Classifier import SupervisedClassifier as SC
 from Utils import write_data_to_disk , load_data_from_disk
@@ -108,12 +108,34 @@ class Manager(object):
         test_comments = reader.read()
         fileClassifiers = [allSVM, allNB, allME, allDT]
         
+        true_labels = get_polarity_from_file(labeled2)
+        all_labels_predicted = []
+        
+        for i in fileClassifiers:
+            supClass = load_data_from_disk(i)
+            classifier = SC()
+            classifier.set_classifier(supClass)
+            labels = []
+            for j in range(len(true_labels)):
+                proc = TextCleaner(test_comments[j])
+                text_cleaned = proc.get_processed_comment()
+                vector = model.get_comment_tf_idf_vector([text_cleaned])
+                result = classifier.classify(vector)            
+                labels.append(result[0][0])
+            show_classification_report(true_labels, labels)
+            print labels 
+            
+        
+        
+            
+        
+        '''
         for i in test_comments:
             proc = TextCleaner(i)
             text_cleaned = proc.get_processed_comment()
             vector = model.get_comment_tf_idf_vector([text_cleaned])            
             print  i + "}"
-            ''' 
+             
             for i in fileClassifiers:
                 supClass = load_data_from_disk(i)
                 classifier = SC()
@@ -121,25 +143,10 @@ class Manager(object):
                 result = classifier.classify(vector)
                 print result[0][0]+"#" ,
             print ""
-            ''' 
+        '''
+             
             
                             
-        '''
-        cleaner = TextCleaner(test_data[5])
-        procesado =  cleaner.get_processed_comment()                
-        vector = model.get_comment_tf_idf_vector([procesado])
-        vec_comp = compress(vector[0])
-        print vec_comp
-        
-        for i in fileClassifiers:                    
-            supClass = load_data_from_disk(i)        
-            classifier = SC()
-            classifier.set_classifier(supClass)
-        
-            result = classifier.classify(vector)
-            print result[0]
-        '''
-            
         
         
 
@@ -152,5 +159,6 @@ if __name__ == '__main__':
     obj.testClassifiersFirstStage(test1)
     
     
-    
+    ''' Training'''
     #obj.prepareModelsFirstStage()
+    #obj.trainClassifiersFirstStage()

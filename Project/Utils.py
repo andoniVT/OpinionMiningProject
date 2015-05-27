@@ -3,9 +3,11 @@ Created on 22/5/2015
 @author: Jorge Andoni Valverde Tohalino
 @email: andoni.valverde@ucsp.edu.pe
 '''
-from _dbus_bindings import Array
-from array import array
 import cPickle
+from Settings import labeled , labeled2
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import f1_score
 testFile = "testFile.txt"
 
 def compress(vector):
@@ -38,21 +40,31 @@ def load_data_from_disk(file):
         data = cPickle.load(fid)
     return data  
 
-def parse_file(file):
+def get_polarity_from_file(file):
     lines = []
     with open(file) as f:
-        content = f.readlines()
+        content = f.readlines()        
         for i in content:
-            lines.append(i)
-    
-    for i in lines:
-        print i
-    
+            i = i.rstrip()
+            begin = i.find("}")+1
+            end = len(i)
+            polarity = i[begin:end]                         
+            lines.append(polarity)    
+    return lines
 
-     
+def show_classification_report(y_true, y_predicted):
+    print classification_report(y_true, y_predicted)
     
 
 
 if __name__ == '__main__':
     
-    parse_file(testFile)
+    y_true = ["P" , "P" , "N" , "NONE" , "NEU"]
+    y_predicted = ["P" , "P" , "N" , "NONE" , "NEU"]
+    
+    #y_true = [1.0 , 1.0 , -1.0 , 0.0 , 0.5]
+    #y_predicted = [1.0 , -1.0 , 0.0 , 0.0 , -1.0]
+    
+    show_classification_report(y_true, y_predicted)
+    
+    
