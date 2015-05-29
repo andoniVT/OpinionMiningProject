@@ -1,42 +1,54 @@
              precision    recall  f1-score   support
 
           N       0.35      0.64      0.46        95
-        NEU       0.39      0.06      0.10       159
-       NONE       0.24      0.43      0.31        51
+        NEU       0.00      0.00      0.00         0
+       NONE       0.69      0.30      0.42       210
           P       0.62      0.68      0.65       195
 
-avg / total       0.46      0.45      0.40       500
+avg / total       0.60      0.51      0.51       500
 
+/home/andoni/.local/lib/python2.7/site-packages/sklearn/metrics/metrics.py:1773: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples.
+  'recall', 'true', average, warn_for)
+[[ 61   8  10  16]
+ [  0   0   0   0]
+ [ 72  10  63  65]
+ [ 40   5  18 132]]
 ['P', 'P', 'NEU', 'N', 'N', 'N', 'P', 'N', 'P', 'NONE', 'NONE', 'N', 'NONE', 'P', 'P', 'NONE', 'P', 'P', 'N', 'P', 'N', 'P', 'NONE', 'NONE', 'P', 'P', 'P', 'NONE', 'N', 'N', 'P', 'N', 'P', 'NONE', 'P', 'P', 'P', 'N', 'N', 'P', 'NONE', 'P', 'NONE', 'NONE', 'NEU', 'P', 'P', 'N', 'P', 'P', 'NONE', 'N', 'P', 'N', 'N', 'N', 'P', 'P', 'P', 'NONE', 'NONE', 'NONE', 'N', 'P', 'NONE', 'P', 'P', 'P', 'P', 'N', 'NONE', 'NEU', 'NONE', 'NONE', 'P', 'N', 'NEU', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'N', 'N', 'P', 'NONE', 'N', 'NONE', 'P', 'NEU', 'NONE', 'P', 'NEU', 'NEU', 'P', 'NONE', 'P', 'N', 'N', 'N', 'NONE', 'N', 'P', 'N', 'P', 'P', 'P', 'NONE', 'N', 'N', 'NONE', 'P', 'NONE', 'P', 'P', 'N', 'P', 'NONE', 'N', 'N', 'N', 'P', 'P', 'NONE', 'N', 'NONE', 'N', 'N', 'P', 'N', 'N', 'N', 'N', 'P', 'P', 'NONE', 'P', 'P', 'NEU', 'N', 'NEU', 'NONE', 'NONE', 'P', 'NEU', 'NONE', 'P', 'N', 'NONE', 'N', 'P', 'P', 'P', 'N', 'N', 'N', 'P', 'P', 'NEU', 'P', 'NONE', 'N', 'P', 'N', 'NONE', 'N', 'P', 'P', 'N', 'N', 'P', 'NEU', 'NONE', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'P', 'NONE', 'P', 'NONE', 'N', 'N', 'P', 'P', 'P', 'P', 'N', 'NEU', 'N', 'P', 'P', 'P', 'P', 'N', 'NONE', 'N', 'NONE', 'NONE', 'P', 'NONE', 'NONE', 'NONE', 'NONE', 'N', 'N', 'NEU', 'N', 'N', 'N', 'NEU', 'NONE', 'NEU', 'P', 'P', 'P', 'P', 'P', 'NONE', 'P', 'N', 'P', 'P', 'P', 'NONE', 'P', 'N', 'NONE', 'N', 'NONE', 'N', 'N', 'N', 'P', 'NONE', 'N', 'N', 'NONE', 'N', 'P', 'P', 'P', 'NEU', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'NONE', 'NONE', 'P', 'P', 'N', 'N', 'P', 'P', 'N', 'P', 'N', 'NONE', 'NEU', 'P', 'NONE', 'N', 'NEU', 'P', 'P', 'N', 'NONE', 'N', 'P', 'N', 'N', 'P', 'P', 'N', 'N', 'NONE', 'NONE', 'P', 'N', 'P', 'P', 'P', 'NONE', 'NONE', 'P', 'NONE', 'NONE', 'NONE', 'N', 'P', 'N', 'P', 'P', 'P', 'N', 'P', 'NONE', 'P', 'N', 'P', 'P', 'N', 'N', 'P', 'N', 'P', 'N', 'N', 'P', 'P', 'N', 'P', 'P', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'N', 'NONE', 'N', 'NONE', 'NONE', 'P', 'N', 'N', 'P', 'P', 'N', 'P', 'P', 'NONE', 'N', 'P', 'NONE', 'N', 'N', 'NONE', 'N', 'N', 'NONE', 'N', 'P', 'NEU', 'P', 'N', 'P', 'N', 'N', 'NEU', 'NONE', 'N', 'NONE', 'P', 'N', 'NONE', 'NONE', 'P', 'NONE', 'P', 'N', 'P', 'NONE', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'N', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'N', 'N', 'P', 'N', 'N', 'P', 'N', 'P', 'NONE', 'P', 'N', 'P', 'N', 'P', 'N', 'P', 'P', 'P', 'N', 'NONE', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'N', 'NEU', 'N', 'P', 'N', 'N', 'N', 'P', 'P', 'P', 'NONE', 'N', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'N', 'P', 'P', 'P', 'N', 'N', 'N', 'N', 'NONE', 'NEU', 'P', 'P', 'N', 'N', 'N', 'NONE', 'N', 'P', 'NONE', 'N', 'NONE', 'N', 'P', 'P', 'P', 'N', 'P', 'NONE', 'P', 'P', 'N', 'P', 'N', 'N', 'N', 'N', 'P', 'P', 'P', 'P', 'NONE', 'P', 'NONE', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'P', 'N', 'N', 'P', 'N', 'NONE']
              precision    recall  f1-score   support
 
           N       0.34      0.63      0.44        95
-        NEU       0.00      0.00      0.00       159
-       NONE       0.33      0.10      0.15        51
+       NONE       0.93      0.07      0.12       210
           P       0.54      0.86      0.66       195
 
-avg / total       0.31      0.46      0.36       500
+avg / total       0.67      0.48      0.39       500
 
+[[ 60   1  34]
+ [ 87  14 109]
+ [ 28   0 167]]
 ['P', 'P', 'P', 'P', 'N', 'N', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'N', 'P', 'P', 'NONE', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'N', 'N', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'NONE', 'N', 'P', 'N', 'P', 'NONE', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'P', 'NONE', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'P', 'NONE', 'P', 'N', 'N', 'N', 'N', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'NONE', 'P', 'N', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'N', 'P', 'N', 'P', 'N', 'N', 'N', 'N', 'P', 'N', 'P', 'P', 'P', 'N', 'N', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'NONE', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'NONE', 'P', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'N', 'NONE', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'N', 'N', 'P', 'P', 'N', 'P', 'P', 'P', 'N', 'P', 'P', 'N', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'N', 'N', 'P', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'P', 'P', 'N', 'P', 'P', 'N', 'N', 'P', 'N', 'P', 'N', 'N', 'P', 'P', 'N', 'P', 'P', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'N', 'P', 'N', 'P', 'N', 'P', 'N', 'N', 'P', 'P', 'N', 'P', 'P', 'NONE', 'N', 'P', 'N', 'N', 'N', 'N', 'P', 'P', 'P', 'P', 'N', 'N', 'P', 'N', 'P', 'N', 'P', 'P', 'P', 'N', 'NONE', 'P', 'N', 'P', 'N', 'P', 'NONE', 'P', 'N', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'N', 'NONE', 'P', 'N', 'N', 'P', 'N', 'P', 'NONE', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'P', 'P', 'N', 'P', 'P', 'N', 'P', 'P', 'N', 'N', 'P', 'N', 'N', 'P', 'N', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'N', 'P', 'P', 'P', 'N', 'N', 'N', 'N', 'N', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'N', 'P', 'P', 'N', 'P', 'N', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'P', 'N', 'P', 'N', 'N', 'N', 'N', 'P', 'N', 'P', 'P', 'NONE', 'P', 'N', 'N', 'P', 'N', 'N', 'N', 'P', 'N', 'P', 'N', 'N', 'P', 'N', 'P']
-/home/andoni/.local/lib/python2.7/site-packages/sklearn/metrics/metrics.py:1771: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
              precision    recall  f1-score   support
 
           N       0.36      0.73      0.48        95
-        NEU       0.00      0.00      0.00       159
-       NONE       0.19      0.24      0.21        51
+       NONE       0.78      0.23      0.36       210
           P       0.61      0.76      0.68       195
 
-avg / total       0.32      0.46      0.38       500
+avg / total       0.63      0.53      0.51       500
 
+[[ 69   6  20]
+ [ 84  49  77]
+ [ 38   8 149]]
 ['P', 'P', 'N', 'N', 'N', 'N', 'P', 'N', 'P', 'NONE', 'P', 'N', 'NONE', 'P', 'P', 'NONE', 'P', 'P', 'NONE', 'P', 'N', 'P', 'P', 'NONE', 'P', 'P', 'P', 'NONE', 'N', 'N', 'P', 'N', 'P', 'NONE', 'P', 'P', 'P', 'N', 'N', 'P', 'NONE', 'P', 'NONE', 'P', 'P', 'N', 'P', 'N', 'P', 'P', 'N', 'N', 'P', 'N', 'N', 'N', 'P', 'P', 'P', 'NONE', 'NONE', 'NONE', 'N', 'P', 'NONE', 'P', 'P', 'P', 'N', 'N', 'NONE', 'P', 'NONE', 'NONE', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'NONE', 'N', 'P', 'NONE', 'N', 'NONE', 'P', 'N', 'NONE', 'P', 'N', 'N', 'P', 'NONE', 'P', 'N', 'N', 'N', 'NONE', 'N', 'N', 'N', 'P', 'P', 'P', 'N', 'P', 'N', 'NONE', 'P', 'NONE', 'P', 'P', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'N', 'P', 'NONE', 'N', 'N', 'P', 'N', 'N', 'N', 'N', 'P', 'P', 'N', 'N', 'P', 'N', 'N', 'N', 'NONE', 'NONE', 'P', 'NONE', 'NONE', 'P', 'N', 'NONE', 'N', 'NONE', 'P', 'N', 'N', 'N', 'N', 'P', 'P', 'P', 'P', 'NONE', 'N', 'P', 'N', 'NONE', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'P', 'P', 'P', 'N', 'NONE', 'N', 'NONE', 'P', 'P', 'NONE', 'NONE', 'NONE', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'N', 'NONE', 'P', 'N', 'NONE', 'N', 'P', 'N', 'N', 'N', 'P', 'NONE', 'N', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'NONE', 'N', 'P', 'N', 'N', 'N', 'P', 'P', 'N', 'P', 'N', 'P', 'N', 'P', 'P', 'N', 'P', 'P', 'P', 'N', 'NONE', 'N', 'P', 'N', 'N', 'P', 'P', 'P', 'N', 'P', 'P', 'P', 'NONE', 'P', 'P', 'N', 'NONE', 'N', 'P', 'P', 'NONE', 'P', 'N', 'P', 'N', 'P', 'N', 'N', 'N', 'P', 'NONE', 'P', 'N', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'N', 'N', 'P', 'P', 'N', 'P', 'P', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'N', 'NONE', 'N', 'P', 'NONE', 'P', 'N', 'N', 'P', 'P', 'N', 'P', 'P', 'P', 'N', 'P', 'NONE', 'N', 'N', 'NONE', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'N', 'P', 'N', 'N', 'P', 'P', 'N', 'NONE', 'P', 'N', 'NONE', 'N', 'P', 'NONE', 'P', 'N', 'P', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'N', 'N', 'N', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'N', 'NONE', 'P', 'P', 'N', 'P', 'N', 'P', 'NONE', 'P', 'N', 'P', 'N', 'P', 'N', 'P', 'NONE', 'P', 'N', 'NONE', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'N', 'N', 'P', 'N', 'P', 'N', 'N', 'N', 'P', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'P', 'P', 'P', 'N', 'N', 'N', 'P', 'P', 'P', 'N', 'N', 'N', 'N', 'NONE', 'N', 'P', 'P', 'N', 'N', 'N', 'NONE', 'N', 'P', 'NONE', 'N', 'P', 'N', 'P', 'P', 'P', 'N', 'P', 'NONE', 'P', 'P', 'N', 'P', 'N', 'N', 'N', 'N', 'P', 'P', 'N', 'P', 'NONE', 'P', 'N', 'N', 'P', 'N', 'P', 'N', 'N', 'P', 'P', 'N', 'N', 'P', 'N', 'N']
              precision    recall  f1-score   support
 
           N       0.32      0.51      0.39        95
-        NEU       0.39      0.09      0.15       159
-       NONE       0.27      0.67      0.39        51
+        NEU       0.00      0.00      0.00         0
+       NONE       0.63      0.38      0.47       210
           P       0.61      0.59      0.60       195
 
-avg / total       0.45      0.42      0.40       500
+avg / total       0.57      0.48      0.51       500
 
+[[ 48  10  11  26]
+ [  0   0   0   0]
+ [ 68  16  79  47]
+ [ 33  12  35 115]]
 ['N', 'P', 'P', 'N', 'NONE', 'P', 'P', 'P', 'P', 'NONE', 'NONE', 'NEU', 'NONE', 'NONE', 'NONE', 'NONE', 'NEU', 'P', 'NONE', 'NONE', 'NONE', 'N', 'P', 'NONE', 'N', 'P', 'NONE', 'NONE', 'N', 'N', 'P', 'N', 'P', 'NONE', 'NONE', 'P', 'P', 'N', 'NONE', 'NEU', 'NEU', 'P', 'NONE', 'NONE', 'NONE', 'N', 'P', 'P', 'N', 'P', 'NONE', 'NEU', 'NONE', 'NONE', 'N', 'N', 'P', 'NEU', 'NONE', 'N', 'N', 'NONE', 'N', 'P', 'NONE', 'P', 'N', 'P', 'P', 'P', 'NONE', 'NEU', 'NONE', 'N', 'P', 'N', 'NEU', 'P', 'P', 'P', 'N', 'NEU', 'NONE', 'NONE', 'N', 'NONE', 'N', 'NONE', 'N', 'NONE', 'NONE', 'P', 'NONE', 'P', 'N', 'P', 'P', 'NONE', 'P', 'N', 'N', 'NEU', 'P', 'N', 'N', 'N', 'P', 'P', 'NONE', 'N', 'P', 'P', 'P', 'N', 'N', 'NONE', 'P', 'NONE', 'P', 'P', 'P', 'N', 'N', 'P', 'P', 'N', 'P', 'NONE', 'N', 'N', 'NEU', 'N', 'N', 'P', 'N', 'N', 'P', 'NEU', 'P', 'P', 'N', 'N', 'N', 'NONE', 'N', 'P', 'N', 'NONE', 'NEU', 'N', 'NONE', 'NEU', 'N', 'N', 'P', 'N', 'NONE', 'P', 'NONE', 'N', 'NONE', 'NONE', 'NONE', 'N', 'P', 'N', 'NEU', 'P', 'NONE', 'P', 'N', 'NONE', 'P', 'P', 'P', 'P', 'NONE', 'P', 'P', 'P', 'P', 'N', 'N', 'P', 'NONE', 'NEU', 'NONE', 'N', 'N', 'P', 'NONE', 'P', 'P', 'N', 'NEU', 'N', 'P', 'P', 'NONE', 'P', 'N', 'NONE', 'N', 'NONE', 'P', 'P', 'NONE', 'P', 'N', 'NEU', 'N', 'P', 'N', 'P', 'N', 'N', 'N', 'NONE', 'N', 'N', 'P', 'P', 'NONE', 'NONE', 'P', 'P', 'P', 'P', 'N', 'P', 'NONE', 'P', 'NEU', 'NONE', 'N', 'NONE', 'N', 'N', 'P', 'P', 'NONE', 'NONE', 'N', 'NONE', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'N', 'P', 'P', 'P', 'P', 'N', 'P', 'P', 'N', 'NONE', 'NEU', 'P', 'P', 'N', 'P', 'NONE', 'P', 'NONE', 'NONE', 'NEU', 'N', 'NEU', 'P', 'P', 'N', 'NONE', 'N', 'P', 'P', 'NONE', 'N', 'P', 'NONE', 'N', 'NONE', 'NONE', 'P', 'P', 'N', 'N', 'NEU', 'P', 'N', 'NONE', 'NONE', 'NONE', 'N', 'N', 'P', 'N', 'NONE', 'N', 'N', 'NONE', 'NONE', 'NONE', 'P', 'NEU', 'P', 'P', 'P', 'N', 'P', 'N', 'P', 'N', 'N', 'P', 'P', 'N', 'NONE', 'N', 'N', 'P', 'P', 'P', 'N', 'N', 'P', 'NONE', 'NONE', 'P', 'P', 'P', 'P', 'NONE', 'N', 'N', 'P', 'NONE', 'P', 'P', 'N', 'NONE', 'P', 'NONE', 'NONE', 'N', 'NONE', 'P', 'P', 'NONE', 'N', 'P', 'N', 'P', 'NEU', 'P', 'N', 'P', 'NEU', 'NONE', 'N', 'NONE', 'P', 'NEU', 'NONE', 'NONE', 'P', 'NONE', 'P', 'N', 'NONE', 'N', 'P', 'P', 'NONE', 'P', 'NONE', 'N', 'P', 'P', 'P', 'NONE', 'N', 'NONE', 'P', 'N', 'N', 'NEU', 'N', 'N', 'N', 'P', 'NEU', 'N', 'NONE', 'P', 'NONE', 'N', 'NONE', 'N', 'P', 'NONE', 'NONE', 'N', 'P', 'N', 'NONE', 'NEU', 'P', 'NONE', 'NONE', 'N', 'NONE', 'P', 'NEU', 'P', 'N', 'N', 'N', 'P', 'N', 'NEU', 'P', 'NEU', 'P', 'P', 'P', 'N', 'P', 'P', 'P', 'NONE', 'P', 'P', 'N', 'P', 'P', 'NEU', 'P', 'N', 'NONE', 'N', 'N', 'N', 'P', 'N', 'N', 'N', 'P', 'P', 'N', 'P', 'P', 'NEU', 'NONE', 'N', 'NONE', 'P', 'NONE', 'N', 'N', 'NONE', 'N', 'P', 'P', 'P', 'N', 'P', 'NONE', 'P', 'NONE', 'N', 'P', 'N', 'P', 'NEU', 'N', 'P', 'P', 'N', 'P', 'NONE', 'P', 'N', 'NEU', 'P', 'NONE', 'P', 'NEU', 'NONE', 'P', 'NONE', 'NONE', 'NONE', 'P', 'N', 'P']

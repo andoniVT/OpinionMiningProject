@@ -22,6 +22,7 @@ pcorpus_train1 = "Data/general-tweets-train-tagged-proccesed.xml"
 ''' corpus manual labeled'''
 labeled = "Data/manual-label-general-tweets-test1k.txt"
 labeled2 = "Data/manual-label-general-tweets-test1k-500.txt"
+labeled3 = "Data/manual-label-general-tweets-test1k-500_2.txt"
 
 
 ''' vector model '''

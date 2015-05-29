@@ -9,7 +9,7 @@ from XMLReader import Reader
 from XMLWritter import Writter
 from TextCleaner import TextCleaner
 from Settings import corpus_train1 as train1 , corpus_train2 as train2   
-from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3 , labeled2
+from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3 , labeled2 , labeled3
 from Settings import  pcorpus_train1 as ptrain1
 from Settings import allVectorizer, allVectorizerTFIDF, allModelTFIDF 
 from Settings import allSVM, allNB, allME, allDT 
@@ -108,7 +108,7 @@ class Manager(object):
         test_comments = reader.read()
         fileClassifiers = [allSVM, allNB, allME, allDT]
         
-        true_labels = get_polarity_from_file(labeled2)
+        true_labels = get_polarity_from_file(labeled3)
         all_labels_predicted = []
         
         for i in fileClassifiers:

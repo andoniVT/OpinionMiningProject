@@ -54,6 +54,7 @@ def get_polarity_from_file(file):
 
 def show_classification_report(y_true, y_predicted):
     print classification_report(y_true, y_predicted)
+    print confusion_matrix(y_true, y_predicted)
     
 
 
