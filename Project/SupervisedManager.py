@@ -45,7 +45,9 @@ class Manager(object):
                     if i[1] == "P+":                                            
                         labels.append("P")
                     elif i[1] == "N+":                                                                    
-                        labels.append("N")                            
+                        labels.append("N")
+                    elif i[1] == "NONE":
+                        labels.append("NEU")                            
                     else:                                                 
                         labels.append(i[1])
         return [comments , labels]
@@ -111,6 +113,7 @@ class Manager(object):
         true_labels = get_polarity_from_file(labeled3)
         all_labels_predicted = []
         
+        
         for i in fileClassifiers:
             supClass = load_data_from_disk(i)
             classifier = SC()
@@ -123,7 +126,8 @@ class Manager(object):
                 result = classifier.classify(vector)            
                 labels.append(result[0][0])
             show_classification_report(true_labels, labels)
-            print labels 
+            print labels
+        
             
         
         
@@ -144,6 +148,7 @@ class Manager(object):
                 print result[0][0]+"#" ,
             print ""
         '''
+        
              
             
                             
