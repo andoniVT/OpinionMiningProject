@@ -38,8 +38,33 @@ class VotingSystem(object):
                 elif self.__matrix[i][j] == "NONE":
                     nones[j]+=1
         
+        for i in range(len(positives)):
+            if positives[i]>=3:
+                print "P ",
+            elif negatives[i]>=3:
+                print "N ",
+            elif neutral[i]>=3:
+                print "NEU ",
+            elif nones[i]>=3:
+                print "NONE ",
+            elif positives[i]==1 and negatives[i]==1 and neutral[i]==1 and nones[i]==1:
+                print "random(NEU,NONE) ",
+            elif positives[i]==2 and negatives[i]==2:
+                print "random(P,N) ",
+            elif positives[i]==2 and neutral[i]==2:
+                print "NEU ",
+            elif positives[i]==2 and nones[i]==2:
+                print "NONE ",
+            elif negatives[i]==2 and neutral[i]==2:
+                print "NEU ",
+            elif negatives[i]==2 and nones[i]==2:
+                print "NONE ",
+            else:
+                print "random(NEU,NONE) ",
+                
         
         
+        print ""
         print "P: " + str(positives)
         print "N: " +  str(negatives)
         print "NEU: " + str(neutral)
@@ -58,25 +83,38 @@ if __name__ == '__main__':
     predictedDT = ["P" , "N",  "P", " NONE", "NEU", "P"]
     
     '''
-                   P  N  NEU  NONE           -> random(NEU,NONE)
-                   P P   N    N              -> random(P,N)
-                   P P  NEU  NEU             -> NEU
-                   P P  NONE NONE            -> NONE
+                   P  N  NEU  NONE  [1,1,1,1]         -> random(NEU,NONE) 
+                   P P   N    N     [2,2,0,0]         -> random(P,N)
+                   P P  NEU  NEU    [2,0,2,0]         -> NEU
+                   P P  NONE NONE   [2,0,0,2]         -> NONE
                    
-                   N N  NEU  NEU             -> NEU
-                   N N NONE  NONE            -> NONE
+                   N N  NEU  NEU    [0,2,2,0]         -> NEU
+                   N N NONE  NONE   [0,2,0,2]         -> NONE
                    
-                   NEU NEU NONE NONE         -> random(NEU,NONE)
+                NEU NEU NONE NONE   [0,0,2,2]        -> random(NEU,NONE)
                    
-                   P P P x                    -> P
-                   N N N x                    -> N
-                   NEU NEU NEU x              -> NEU
-                   NONE NONE NONE x           -> NONE
+                   P P P x          [3,,,]          -> P
+                   N N N x          [,3,,]          -> N
+                   NEU NEU NEU x    [,,3,]          -> NEU
+                   NONE NONE NONE x [,,,3]          -> NONE
                    
-                   PPPP                       -> P
-                   NNNN                       -> N
-                   NEUNEUNEUNEU               -> NEU
-                   NONENONENONENONE           -> NONE
+                   PPPP             [4,0,0,0]          -> P
+                   NNNN             [0,4,0,0]          -> N
+                   NEUNEUNEUNEU     [0,0,4,0]          -> NEU
+                   NONENONENONENONE [0,0,0,4]          -> NONE
+                   
+                   P P N NEU     [2,1,1,0]    -> P
+                   P P N NONE    [2,1,0,1]    -> P
+                   P P NEU NONE  [2,0,1,1]    -> P
+                   
+                   N N P NEU    [1,2,1,0]     -> N
+                   N N NEU NONE [0,2,1,1]     -> N
+                   N N P NONE   [1,2,0,1]     -> N
+                   
+                   NEU NEU  [] -> NEU
+                   
+                   NONE NONE -> NONE
+                   
     
     '''
     
