@@ -46,8 +46,8 @@ class Manager(object):
                         labels.append("P")
                     elif i[1] == "N+":                                                                    
                         labels.append("N")
-                    elif i[1] == "NONE":
-                        labels.append("NEU")                            
+                    #elif i[1] == "NONE":
+                    #    labels.append("NEU")                            
                     else:                                                 
                         labels.append(i[1])
         return [comments , labels]
@@ -110,7 +110,7 @@ class Manager(object):
         test_comments = reader.read()
         fileClassifiers = [allSVM, allNB, allME, allDT]
         
-        true_labels = get_polarity_from_file(labeled3)
+        true_labels = get_polarity_from_file(labeled2)
         all_labels_predicted = []
         
         
