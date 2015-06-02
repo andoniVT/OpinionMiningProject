@@ -34,7 +34,7 @@ class Manager(object):
     def __readData(self):
         comments = []
         labels = []
-        reader = Reader(train1a, 1)
+        reader = Reader(train1, 1)
         corpus = reader.get_comments()
         for i in corpus:
             if i[0] is not None:
@@ -107,12 +107,12 @@ class Manager(object):
         model.set_models(vectorizer, transformer)
         
         reader = Reader(test_data, 3)
-        #test_comments = reader.read()
-        test_comments = get_comments_from_file(labeled3)
+        test_comments = reader.read()
+        #test_comments = get_comments_from_file(labeled3)
         fileClassifiers = [allSVM, allNB, allME, allDT]
         
-        #true_labels = get_polarity_from_file(labeled2)
-        true_labels = get_polarity_from_file(labeled3)
+        true_labels = get_polarity_from_file(labeled2)
+        #true_labels = get_polarity_from_file(labeled3)
         all_labels_predicted = []
         
         print true_labels
