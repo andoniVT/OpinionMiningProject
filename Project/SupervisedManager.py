@@ -8,12 +8,12 @@ Created on 25/5/2015
 from XMLReader import Reader
 from XMLWritter import Writter
 from TextCleaner import TextCleaner
-from Settings import corpus_train1 as train1 , corpus_train2 as train2   
+from Settings import corpus_train1 as train1 , corpus_train2 as train2 , corpus_train1a as train1a   
 from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3 , labeled2 , labeled3
 from Settings import  pcorpus_train1 as ptrain1
 from Settings import allVectorizer, allVectorizerTFIDF, allModelTFIDF 
 from Settings import allSVM, allNB, allME, allDT 
-from Utils import compress , expand , get_polarity_from_file , show_classification_report
+from Utils import compress , expand , get_polarity_from_file , show_classification_report , get_comments_from_file
 from VectorModel import VectorModel as VM
 from Classifier import SupervisedClassifier as SC
 from Utils import write_data_to_disk , load_data_from_disk
@@ -34,7 +34,7 @@ class Manager(object):
     def __readData(self):
         comments = []
         labels = []
-        reader = Reader(train1, 1)
+        reader = Reader(train1a, 1)
         corpus = reader.get_comments()
         for i in corpus:
             if i[0] is not None:
@@ -107,11 +107,15 @@ class Manager(object):
         model.set_models(vectorizer, transformer)
         
         reader = Reader(test_data, 3)
-        test_comments = reader.read()
+        #test_comments = reader.read()
+        test_comments = get_comments_from_file(labeled3)
         fileClassifiers = [allSVM, allNB, allME, allDT]
         
-        true_labels = get_polarity_from_file(labeled2)
+        #true_labels = get_polarity_from_file(labeled2)
+        true_labels = get_polarity_from_file(labeled3)
         all_labels_predicted = []
+        
+        print true_labels
         
         
         for i in fileClassifiers:

@@ -8,6 +8,9 @@ from Settings import labeled , labeled2
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
+import elementtree.ElementTree as ET
+from Settings import corpus_train1 as train1 , labeled3
+
 testFile = "testFile.txt"
 
 def compress(vector):
@@ -52,11 +55,94 @@ def get_polarity_from_file(file):
             lines.append(polarity)    
     return lines
 
+def get_comments_from_file(file):
+    lines = []
+    with open(file) as f:
+        content = f.readlines()
+        for i in content:
+            i = i.rstrip()
+            end = i.find("}")
+            lines.append(i[0:end])
+    return lines 
+
 def show_classification_report(y_true, y_predicted):
     print classification_report(y_true, y_predicted)
     print confusion_matrix(y_true, y_predicted)
     
 
+def generar_xml(contenido, valores):
+    root = ET.Element("tweets")
+    id = 1
+    for i in range(len(contenido)):                        
+        comment = ET.SubElement(root , "tweet")
+        
+        comment_id = ET.SubElement(comment , "tweetid")
+        comment_id.text = str(id)
+        
+        user = ET.SubElement(comment , "user")
+        
+        content = ET.SubElement(comment , "content")
+        content.text = contenido[i]
+        
+        date = ET.SubElement(comment , "date")
+        
+        lang = ET.SubElement(comment , "lang")
+        
+        sentiments = ET.SubElement(comment , "sentiments")
+        pol = ET.SubElement(sentiments , "polarity")
+        value = ET.SubElement(pol , "value")
+        value.text = valores[i]
+         
+        id+=1
+        
+    tree = ET.ElementTree(root)
+    tree.write("nuevoTrainPrueba.xml")
+
+def auxiliar():
+    total_neu = 201
+    total_none = 444
+    aux_neu = 0
+    aux_none = 0
+    
+    contenidos_train = []
+    polaridades_train = []
+    
+    neutros_test = []
+    nones_test = []
+    
+    tree = ET.parse(train1)
+    root = tree.getroot()        
+            
+    for child in root:
+        content = child[2].text
+        polarity = child[5][0][0].text
+        
+        if polarity == "NEU" and aux_neu < total_neu:
+            values = (content , polarity)
+            neutros_test.append(values)
+            aux_neu+=1 
+        
+        elif polarity == "NONE" and aux_none < total_none:
+            values = (content , polarity)
+            nones_test.append(values)
+            aux_none+=1
+        
+        else:
+            contenidos_train.append(content)
+            polaridades_train.append(polarity)
+    
+    generar_xml(contenidos_train, polaridades_train)
+    
+    print "NEUTROS"
+    for i in neutros_test:
+        print i[0] + "}" + i[1]
+    
+    print "\n"
+    print "NONES"
+    for i in nones_test:
+        print i[0] + "}" + i[1]
+    
+    
 
 if __name__ == '__main__':
     
@@ -66,6 +152,15 @@ if __name__ == '__main__':
     #y_true = [1.0 , 1.0 , -1.0 , 0.0 , 0.5]
     #y_predicted = [1.0 , -1.0 , 0.0 , 0.0 , -1.0]
     
-    show_classification_report(y_true, y_predicted)
+    #show_classification_report(y_true, y_predicted)
+    contenido = ["hola que bueno" , "que malo"]
+    valores = ["P" , "N"]
+    
+    #generar_xml(contenido, valores)
+    
+    lines = get_comments_from_file(labeled3)
+    for i in lines:
+        print i
+    
     
     
