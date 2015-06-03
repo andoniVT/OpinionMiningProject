@@ -1,3 +1,4 @@
+import random
 '''
 Created on 2/6/2015
 @author: Jorge Andoni Valverde Tohalino
@@ -13,6 +14,7 @@ class VotingSystem(object):
         self.__predictedME = me
         self.__predictedDT = dt
         self.__matrix = [self.__predictedSVM, self.__predictedNB, self.__predictedME, self.__predictedDT]
+        self.__predicted = []
         
     
     def naiveVoting(self):
@@ -39,36 +41,52 @@ class VotingSystem(object):
                     nones[j]+=1
         
         for i in range(len(positives)):
-            if positives[i]>=3:
-                print "P ",
-            elif negatives[i]>=3:
-                print "N ",
-            elif neutral[i]>=3:
-                print "NEU ",
-            elif nones[i]>=3:
-                print "NONE ",
+            if positives[i]>=3:                
+                self.__predicted.append("P")
+            elif negatives[i]>=3:                
+                self.__predicted.append("N")
+            elif neutral[i]>=3:                
+                self.__predicted.append("NEU")
+            elif nones[i]>=3:                
+                self.__predicted.append("NONE")
             elif positives[i]==1 and negatives[i]==1 and neutral[i]==1 and nones[i]==1:
-                print "random(NEU,NONE) ",
+                flag = random.randrange(2)
+                if flag==0:                     
+                    self.__predicted.append("NEU")
+                if flag==1:                     
+                    self.__predicted.append("NONE")                 
             elif positives[i]==2 and negatives[i]==2:
-                print "random(P,N) ",
-            elif positives[i]==2 and neutral[i]==2:
-                print "NEU ",
-            elif positives[i]==2 and nones[i]==2:
-                print "NONE ",
-            elif negatives[i]==2 and neutral[i]==2:
-                print "NEU ",
-            elif negatives[i]==2 and nones[i]==2:
-                print "NONE ",
+                flag = random.randrange(2)
+                if flag==0:                     
+                    self.__predicted.append("P")
+                if flag==1:                     
+                    self.__predicted.append("N")                
+            elif positives[i]==2 and neutral[i]==2:                
+                self.__predicted.append("NEU")
+            elif positives[i]==2 and nones[i]==2:                
+                self.__predicted.append("NONE")
+            elif negatives[i]==2 and neutral[i]==2:                
+                self.__predicted.append("NEU")
+            elif negatives[i]==2 and nones[i]==2:                
+                self.__predicted.append("NONE")
+            elif neutral[i]==2 and nones[i]==2:
+                flag = random.randrange(2)
+                if flag==0:                     
+                    self.__predicted.append("NEU")
+                if flag==1:                     
+                    self.__predicted.append("NONE")
+            elif positives[i]==2:                
+                self.__predicted.append("P")
+            elif negatives[i]==2:                
+                self.__predicted.append("N")
+            elif neutral[i]==2:                
+                self.__predicted.append("NEU")
+            elif nones[i]==2:                
+                self.__predicted.append("NONE")
             else:
-                print "random(NEU,NONE) ",
-                
-        
-        
-        print ""
-        print "P: " + str(positives)
-        print "N: " +  str(negatives)
-        print "NEU: " + str(neutral)
-        print "NONE: " + str(nones) 
+                print "Nose!" 
+                        
+        return self.__predicted 
             
     
     def weightedVoting(self):
@@ -78,9 +96,9 @@ class VotingSystem(object):
 if __name__ == '__main__':
     
     predictedSVM = ["P" , "P", "P",   "N",  "NEU", "NONE"]
-    predictedNB = ["N" , "P",  "N",   "P",  "NEU", "NONE"]
+    predictedNB = ["N" , "P",  "N",   "P",  "NONE", "NEU"]
     predictedME = ["P" , "N",  "NEU", "N",  "NEU", "P"]
-    predictedDT = ["P" , "N",  "P", " NONE", "NEU", "P"]
+    predictedDT = ["P" , "N",  "P", " NONE", "NONE", "P"]
     
     '''
                    P  N  NEU  NONE  [1,1,1,1]         -> random(NEU,NONE) 
@@ -122,4 +140,5 @@ if __name__ == '__main__':
     
     obj = VotingSystem(trueLabels, predictedSVM, predictedNB, predictedME, predictedDT)
     
-    obj.naiveVoting()
+    naive = obj.naiveVoting()
+    print naive
