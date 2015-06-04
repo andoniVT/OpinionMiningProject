@@ -108,15 +108,14 @@ class Manager(object):
         
         reader = Reader(test_data, 3)
         test_comments = reader.read()
-        #test_comments = get_comments_from_file(labeled3)
+        
+        
         fileClassifiers = [allSVM, allNB, allME, allDT]
         
         true_labels = get_polarity_from_file(labeled2)
-        #true_labels = get_polarity_from_file(labeled3)
+        
         all_labels_predicted = []
-        
-        print true_labels
-        
+                    
         
         for i in fileClassifiers:
             supClass = load_data_from_disk(i)
@@ -129,8 +128,10 @@ class Manager(object):
                 vector = model.get_comment_tf_idf_vector([text_cleaned])
                 result = classifier.classify(vector)            
                 labels.append(result[0][0])
-            show_classification_report(true_labels, labels)
-            print labels
+            #show_classification_report(true_labels, labels)
+            print "ok"
+            all_labels_predicted.append(labels)
+        return all_labels_predicted
         
             
         
