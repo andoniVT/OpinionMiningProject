@@ -1,1 +1,58 @@
-1000
+             precision    recall  f1-score   support
+
+          N       0.46      0.65      0.54       239
+        NEU       0.29      0.14      0.19        88
+       NONE       0.67      0.44      0.53       271
+          P       0.64      0.70      0.67       402
+
+avg / total       0.57      0.57      0.56      1000
+
+[[156  16  16  51]
+ [ 43  12   5  28]
+ [ 66   5 119  81]
+ [ 75   8  37 282]]
+ok
+             precision    recall  f1-score   support
+
+          N       0.46      0.65      0.54       239
+        NEU       0.00      0.00      0.00        88
+       NONE       0.94      0.11      0.19       271
+          P       0.55      0.86      0.67       402
+
+avg / total       0.58      0.53      0.45      1000
+
+/usr/local/lib/python2.7/dist-packages/scikit_learn-0.14.1-py2.7-linux-x86_64.egg/sklearn/metrics/metrics.py:1905: UserWarning: The sum of true positives and false positives are equal to zero for some labels. Precision is ill defined for those labels ['NEU']. The precision and recall are equal to zero for some labels. fbeta_score is ill defined for those labels ['NEU']. 
+  average=None)
+[[156   0   1  82]
+ [ 48   0   0  40]
+ [ 81   0  29 161]
+ [ 54   0   1 347]]
+ok
+             precision    recall  f1-score   support
+
+          N       0.46      0.71      0.56       239
+        NEU       0.00      0.00      0.00        88
+       NONE       0.78      0.31      0.44       271
+          P       0.60      0.78      0.68       402
+
+avg / total       0.56      0.57      0.52      1000
+
+[[170   0   5  64]
+ [ 49   0   5  34]
+ [ 78   0  83 110]
+ [ 75   0  14 313]]
+ok
+             precision    recall  f1-score   support
+
+          N       0.41      0.47      0.44       239
+        NEU       0.21      0.18      0.20        88
+       NONE       0.54      0.52      0.53       271
+          P       0.62      0.61      0.62       402
+
+avg / total       0.51      0.51      0.51      1000
+
+[[112  26  38  63]
+ [ 32  16  13  27]
+ [ 61  12 141  57]
+ [ 65  22  71 244]]
+ok

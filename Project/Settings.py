@@ -34,7 +34,16 @@ labeled3 = "Data/manual-label-general-tweets-test1k-500_2.txt"
 ''' vector model '''
 allVectorizer = "Models/all/simpleVectorizer.pk1"
 allVectorizerTFIDF = "Models/all/tfidfVectorizer.pk1"
-allModelTFIDF = "Models/all/tfidfModel.pk1" 
+allModelTFIDF = "Models/all/tfidfModel.pk1"
+
+pnneuVectorizer = "Models/p-n-neu/simpleVectorizer.pk1"
+pnneuVectorizerTFIDF = "Models/p-n-neu/tfidfVectorizer.pk1"
+pnneuModelTFIDF = "Models/p-n-neu/tfidfModel.pk1"
+
+pnnoneVectorizer = "Models/p-n-none/simpleVectorizer.pk1"
+pnnoneVectorizerTFIDF = "Models/p-n-none/tfidfVectorizer.pk1"
+pnnoneModelTFIDF = "Models/p-n-none/tfidfModel.pk1"
+  
 
 ''' classifiers '''
 allSVM = "Classifiers/all/SVM.pk1"
@@ -42,6 +51,15 @@ allNB = "Classifiers/all/NB.pk1"
 allME = "Classifiers/all/ME.pk1"
 allDT = "Classifiers/all/DT.pk1"
 
+pnneuSVM = "Classifiers/p-n-neu/SVM.pk1"
+pnneuNB = "Classifiers/p-n-neu/NB.pk1"
+pnneuME = "Classifiers/p-n-neu/ME.pk1"
+pnneuDT = "Classifiers/p-n-neu/DT.pk1"
+
+pnnoneSVM = "Classifiers/p-n-none/SVM.pk1"
+pnnoneNB = "Classifiers/p-n-none/NB.pk1"
+pnnoneME = "Classifiers/p-n-none/ME.pk1"
+pnnoneDT = "Classifiers/p-n-none/DT.pk1"
 
 
 

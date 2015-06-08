@@ -9,7 +9,7 @@ from XMLReader import Reader
 from XMLWritter import Writter
 from TextCleaner import TextCleaner
 from Settings import corpus_train1 as train1 , corpus_train2 as train2 , corpus_train1a as train1a   
-from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3 , labeled2 , labeled3
+from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3 , labeled2 , labeled3 , labeled
 from Settings import  pcorpus_train1 as ptrain1
 from Settings import allVectorizer, allVectorizerTFIDF, allModelTFIDF 
 from Settings import allSVM, allNB, allME, allDT 
@@ -19,10 +19,18 @@ from Classifier import SupervisedClassifier as SC
 from Utils import write_data_to_disk , load_data_from_disk
 import os.path
 
+from Settings import pnneuVectorizer, pnneuVectorizerTFIDF, pnneuModelTFIDF 
+from Settings import pnnoneVectorizer, pnnoneVectorizerTFIDF, pnnoneModelTFIDF  
+from Settings import pnnoneSVM, pnnoneNB, pnnoneME, pnnoneDT
+from Settings import pnneuSVM, pnneuNB, pnneuME, pnneuDT
+
 class Manager(object):
     
-    def __init__(self):
-        self.__trainData = self.getTrainData()        
+    def __init__(self, flag=True):
+        if flag:
+            self.__trainData = self.getTrainData()
+        else:
+            print ""                
         
     def getTrainData(self):
         flag = os.path.isfile(ptrain1)
@@ -45,9 +53,7 @@ class Manager(object):
                     if i[1] == "P+":                                            
                         labels.append("P")
                     elif i[1] == "N+":                                                                    
-                        labels.append("N")
-                    #elif i[1] == "NONE":
-                    #    labels.append("NEU")                            
+                        labels.append("N")                                            
                     else:                                                 
                         labels.append(i[1])
         return [comments , labels]
@@ -79,8 +85,10 @@ class Manager(object):
         write_data_to_disk(allVectorizer, modelVectorizer)
         write_data_to_disk(allVectorizerTFIDF, modelVectorizerTFIDF)
         write_data_to_disk(allModelTFIDF, modelTFIDF)
-                
-                    
+    
+    def prepareModelsSecondStage(self):
+        pass 
+                                
     def trainClassifiersFirstStage(self):
         data = load_data_from_disk(allModelTFIDF)
         data_expanded = []
@@ -100,6 +108,9 @@ class Manager(object):
             fClass = classifier.train()                                 
             write_data_to_disk(fileClassifiers[i], fClass)
     
+    def trainClassifiersSecondStage(self):
+        pass 
+    
     def testClassifiersFirstStage(self, test_data):
         vectorizer = load_data_from_disk(allVectorizer)
         transformer = load_data_from_disk(allVectorizerTFIDF)
@@ -112,7 +123,7 @@ class Manager(object):
         
         fileClassifiers = [allSVM, allNB, allME, allDT]
         
-        true_labels = get_polarity_from_file(labeled2)
+        true_labels = get_polarity_from_file(labeled)
         
         all_labels_predicted = []
                     
@@ -128,16 +139,11 @@ class Manager(object):
                 vector = model.get_comment_tf_idf_vector([text_cleaned])
                 result = classifier.classify(vector)            
                 labels.append(result[0][0])
-            #show_classification_report(true_labels, labels)
+            show_classification_report(true_labels, labels)
             print "ok"
             all_labels_predicted.append(labels)
         return all_labels_predicted
-        
-            
-        
-        
-            
-        
+    
         '''
         for i in test_comments:
             proc = TextCleaner(i)
@@ -153,6 +159,9 @@ class Manager(object):
                 print result[0][0]+"#" ,
             print ""
         '''
+    
+    def testClassifiersSecondStage(self, test_data):
+        pass 
         
              
             
@@ -169,6 +178,11 @@ if __name__ == '__main__':
     obj.testClassifiersFirstStage(test1)
     
     
-    ''' Training'''
+    ''' Training first stage'''
     #obj.prepareModelsFirstStage()
     #obj.trainClassifiersFirstStage()
+    
+    ''' Training second stage '''
+    #obj.prepareModelsSecondStage()
+    #obj.trainClassifiersSecondStage(test1) 
+    

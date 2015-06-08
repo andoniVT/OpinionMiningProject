@@ -1,6 +1,6 @@
 import random
 from SupervisedManager import Manager
-from Settings import corpus_test1 as test1 , labeled2
+from Settings import corpus_test1 as test1 , labeled2 , labeled
 from Utils import get_polarity_from_file , show_classification_report
 
 '''
@@ -138,7 +138,7 @@ if __name__ == '__main__':
     predictedNB = labels[1]
     predictedME = labels[2]
     predictedDT = labels[3]
-    trueLabels = get_polarity_from_file(labeled2)
+    trueLabels = get_polarity_from_file(labeled)
     
     voting = VotingSystem(predictedSVM, predictedNB, predictedME, predictedDT)
     naive = voting.naiveVoting()
