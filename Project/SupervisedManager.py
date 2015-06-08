@@ -119,22 +119,29 @@ class Manager(object):
         data_expanded = []
         for i in data:
             vec =  expand(i)
-            data_expanded.append(vec)
-        
-                
+            data_expanded.append(vec)                 
         labels = []
         for i in self.__trainData:
-            labels.append(i[1])
-            
+            labels.append(i[1])            
         fileClassifiers = [allSVM, allNB, allME, allDT]
-        
         for i in range(4):            
             classifier = SC(data_expanded, labels, i+1)
             fClass = classifier.train()                                 
             write_data_to_disk(fileClassifiers[i], fClass)
     
     def trainClassifiersSecondStage(self):
-        pass 
+        data = load_data_from_disk(pnneuModelTFIDF)
+        data2 = load_data_from_disk(pnnoneModelTFIDF)
+        data_expanded = []
+        data_expanded2 = []
+        
+        '''
+        Continuara ...
+        '''
+        
+         
+        
+        
     
     def testClassifiersFirstStage(self, test_data):
         vectorizer = load_data_from_disk(allVectorizer)
