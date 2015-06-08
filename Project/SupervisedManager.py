@@ -26,12 +26,9 @@ from Settings import pnneuSVM, pnneuNB, pnneuME, pnneuDT
 
 class Manager(object):
     
-    def __init__(self, flag=True):
-        if flag:
-            self.__trainData = self.getTrainData()
-        else:
-            print ""                
-        
+    def __init__(self):
+        self.__trainData = self.getTrainData()
+                                
     def getTrainData(self):
         flag = os.path.isfile(ptrain1)
         if flag:        
@@ -87,7 +84,35 @@ class Manager(object):
         write_data_to_disk(allModelTFIDF, modelTFIDF)
     
     def prepareModelsSecondStage(self):
-        pass 
+        train_commentsP_N_NEU = []
+        train_commentsP_N_NONE = []
+        for i in self.__trainData:
+            if i[1]=="NEU":
+                train_commentsP_N_NEU.append(i[0])
+            elif i[1]=="NONE":
+                train_commentsP_N_NONE.append(i[0])
+            else :
+                train_commentsP_N_NEU.append(i[0])
+                train_commentsP_N_NONE.append(i[0])
+        
+        model = VM(train_commentsP_N_NEU)
+        vectorModelData = model.prepare_models()
+        modelVectorizer = vectorModelData[0]
+        modelVectorizerTFIDF = vectorModelData[1]
+        modelTFIDF = vectorModelData[2]
+        write_data_to_disk(pnneuVectorizer, modelVectorizer)
+        write_data_to_disk(pnneuVectorizerTFIDF, modelVectorizerTFIDF)
+        write_data_to_disk(pnneuModelTFIDF, modelTFIDF)
+        
+        model2 = VM(train_commentsP_N_NONE)
+        vectorModelData2 = model2.prepare_models()
+        modelVectorizer2 = vectorModelData2[0]
+        modelVectorizerTFIDF2 = vectorModelData2[1]
+        modelTFIDF2 = vectorModelData2[2]
+        write_data_to_disk(pnnoneVectorizer, modelVectorizer2)
+        write_data_to_disk(pnnoneVectorizerTFIDF, modelVectorizerTFIDF2)
+        write_data_to_disk(pnnoneModelTFIDF, modelTFIDF2)
+                      
                                 
     def trainClassifiersFirstStage(self):
         data = load_data_from_disk(allModelTFIDF)
@@ -175,7 +200,7 @@ if __name__ == '__main__':
     obj = Manager()
     test = ["Altozano tras la presentación de su libro 101 españoles y Dios. Divertido, emocionante y brillante." , "Mañana en Gaceta: TVE, la que pagamos tú y yo, culpa a una becaria de su falsa información sobre el cierre de @gaceta" , "Más mañana en Gaceta. Amaiur depende de Uxue Barkos para crear grupo propio. ERC no cumple el req. del 15% y el PNV no quiere competencia", "Dado q la deuda privada es superior a la publica, el recorte del gasto privado tiene q ser superior al del gasto publico. Xq nadie protesta?", "Portada El Mundo http://t.co/3EZnkcyL ...", "Tras un año, constato: a las 7 d la mañana, cuando paseo a la perra x mi barrio, 8 d cada 10 personas con las q me cruzo, son mujeres."]
     
-    obj.testClassifiersFirstStage(test1)
+    #obj.testClassifiersFirstStage(test1)
     
     
     ''' Training first stage'''
@@ -183,6 +208,6 @@ if __name__ == '__main__':
     #obj.trainClassifiersFirstStage()
     
     ''' Training second stage '''
-    #obj.prepareModelsSecondStage()
+    obj.prepareModelsSecondStage()
     #obj.trainClassifiersSecondStage(test1) 
     
