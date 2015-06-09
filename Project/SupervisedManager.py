@@ -28,6 +28,8 @@ class Manager(object):
     
     def __init__(self):
         self.__trainData = self.getTrainData()
+        self.__labelsPNNEU = []
+        self.__labelsPNEUNONE = []
                                 
     def getTrainData(self):
         flag = os.path.isfile(ptrain1)
@@ -89,11 +91,15 @@ class Manager(object):
         for i in self.__trainData:
             if i[1]=="NEU":
                 train_commentsP_N_NEU.append(i[0])
+                self.__labelsPNNEU.append(i[1])
             elif i[1]=="NONE":
                 train_commentsP_N_NONE.append(i[0])
+                self.__labelsPNEUNONE.append(i[1])
             else :
                 train_commentsP_N_NEU.append(i[0])
                 train_commentsP_N_NONE.append(i[0])
+                self.__labelsPNNEU.append(i[1])
+                self.__labelsPNEUNONE.append(i[1])
         
         model = VM(train_commentsP_N_NEU)
         vectorModelData = model.prepare_models()
@@ -134,14 +140,27 @@ class Manager(object):
         data2 = load_data_from_disk(pnnoneModelTFIDF)
         data_expanded = []
         data_expanded2 = []
+        for i in data:
+            vec = expand(i)
+            data_expanded.append(vec)
+        for i in data2:
+            vec = expand(i)
+            data_expanded2.append(vec)
         
-        '''
-        Continuara ...
-        '''
-        
-         
+        fileClassifiers = [pnneuSVM, pnneuNB, pnneuME, pnneuDT]
+        fileClassifiers2 = [pnnoneSVM, pnnoneNB, pnnoneME, pnnoneDT]
         
         
+        for i in range(4):
+            print "first classifier: "
+            classifier = SC(data_expanded, self.__labelsPNNEU, i+1)
+            fClass = classifier.train()
+            write_data_to_disk(fileClassifiers[i], fClass)
+            print "second classifier"
+            classifier2 = SC(data_expanded2, self.__labelsPNEUNONE, i+1)
+            fClass2 = classifier2.train()
+            write_data_to_disk(fileClassifiers2[i], fClass2)
+                
     
     def testClassifiersFirstStage(self, test_data):
         vectorizer = load_data_from_disk(allVectorizer)
@@ -216,5 +235,5 @@ if __name__ == '__main__':
     
     ''' Training second stage '''
     obj.prepareModelsSecondStage()
-    #obj.trainClassifiersSecondStage(test1) 
+    obj.trainClassifiersSecondStage() 
     
