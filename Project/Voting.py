@@ -133,12 +133,17 @@ if __name__ == '__main__':
     '''
     
     obj = Manager()
-    labels = obj.testClassifiersFirstStage(test1)
+    labels = obj.testClassifiersSecondStage(test1)
     predictedSVM = labels[0]
     predictedNB = labels[1]
     predictedME = labels[2]
     predictedDT = labels[3]
-    trueLabels = get_polarity_from_file(labeled)
+    trueLabels = get_polarity_from_file(labeled2)
+    
+    show_classification_report(trueLabels, predictedSVM)
+    show_classification_report(trueLabels, predictedNB)
+    show_classification_report(trueLabels, predictedME)
+    show_classification_report(trueLabels, predictedDT)
     
     voting = VotingSystem(predictedSVM, predictedNB, predictedME, predictedDT)
     naive = voting.naiveVoting()

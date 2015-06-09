@@ -166,19 +166,12 @@ class Manager(object):
         vectorizer = load_data_from_disk(allVectorizer)
         transformer = load_data_from_disk(allVectorizerTFIDF)
         model = VM()
-        model.set_models(vectorizer, transformer)
-        
+        model.set_models(vectorizer, transformer)    
         reader = Reader(test_data, 3)
-        test_comments = reader.read()
-        
-        
-        fileClassifiers = [allSVM, allNB, allME, allDT]
-        
-        true_labels = get_polarity_from_file(labeled)
-        
-        all_labels_predicted = []
-                    
-        
+        test_comments = reader.read()                
+        fileClassifiers = [allSVM, allNB, allME, allDT]        
+        true_labels = get_polarity_from_file(labeled)        
+        all_labels_predicted = []                            
         for i in fileClassifiers:
             supClass = load_data_from_disk(i)
             classifier = SC()
@@ -193,33 +186,81 @@ class Manager(object):
             show_classification_report(true_labels, labels)
             print "ok"
             all_labels_predicted.append(labels)
-        return all_labels_predicted
+        return all_labels_predicted    
+        
     
-        '''
-        for i in test_comments:
-            proc = TextCleaner(i)
+    def classReduction(self, typeClassifier, test_data):
+        predicted = []
+        vectorizer = load_data_from_disk(pnneuVectorizer)
+        transformer = load_data_from_disk(pnneuVectorizerTFIDF)
+        model = VM()
+        model.set_models(vectorizer, transformer)
+        
+        vectorizer2 = load_data_from_disk(pnnoneVectorizer)
+        transformer2 = load_data_from_disk(pnnoneVectorizerTFIDF)
+        model2 = VM()
+        model2.set_models(vectorizer2, transformer2)
+        
+        reader = Reader(test_data, 3)
+        test_comments = reader.read()    
+        #true_labels = get_polarity_from_file(labeled)            
+        true_labels = get_polarity_from_file(labeled2)
+        fileClassifiers = [pnneuSVM, pnneuNB, pnneuME, pnneuDT]
+        fileClassifiers2 = [pnnoneSVM, pnnoneNB, pnnoneME, pnnoneDT]
+        
+        labelsPNNEU = []
+        labelsPNNONE = []
+        
+        supClass = load_data_from_disk(fileClassifiers[typeClassifier-1])
+        classifier = SC()
+        classifier.set_classifier(supClass)
+        
+        supClass2 = load_data_from_disk(fileClassifiers2[typeClassifier-1])
+        classifier2 = SC()
+        classifier2.set_classifier(supClass2)
+                
+        for j in range(len(true_labels)):
+            proc = TextCleaner(test_comments[j])
             text_cleaned = proc.get_processed_comment()
-            vector = model.get_comment_tf_idf_vector([text_cleaned])            
-            print  i + "}"
-             
-            for i in fileClassifiers:
-                supClass = load_data_from_disk(i)
-                classifier = SC()
-                classifier.set_classifier(supClass)
-                result = classifier.classify(vector)
-                print result[0][0]+"#" ,
-            print ""
-        '''
+            
+            vector = model.get_comment_tf_idf_vector([text_cleaned])
+            result = classifier.classify(vector)            
+            labelsPNNEU.append(result[0][0])
+            
+            vector2 = model2.get_comment_tf_idf_vector([text_cleaned])
+            result2 = classifier2.classify(vector2)
+            labelsPNNONE.append(result2[0][0])
+        
+        for i in range(len(labelsPNNEU)):
+            label = labelsPNNEU[i]
+            label2 = labelsPNNONE[i]
+            if label == "P" and label2 == "P":
+                predicted.append("P")
+            elif label == "P" and label2 == "N":
+                predicted.append("NEU")
+            elif label == "P" and label2 == "NONE":
+                predicted.append("NONE")
+            elif label == "N" and label2 == "P":
+                predicted.append("NEU")
+            elif label == "N" and label2 == "N":
+                predicted.append("N")
+            elif label == "N" and label2 == "NONE":
+                predicted.append("NONE")
+            elif label == "NEU" and label2 == "P":
+                predicted.append("NEU")
+            elif label == "NEU" and label2 == "N":
+                predicted.append("NEU")
+            elif label == "NEU" and label2 == "NONE":
+                predicted.append("NONE")                                                
+        return predicted
     
     def testClassifiersSecondStage(self, test_data):
-        pass 
-        
-             
-            
-                            
-        
-        
-
+        all_labels = []
+        for i in range(4):
+            labels = self.classReduction(i+1, test_data)
+            all_labels.append(labels)            
+        return all_labels
+                     
 
 if __name__ == '__main__':
     

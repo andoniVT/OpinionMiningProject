@@ -69,3 +69,22 @@ firstResults = "Results/firstStage/results.txt"
 
 
 
+
+
+
+'''
+        for i in test_comments:
+            proc = TextCleaner(i)
+            text_cleaned = proc.get_processed_comment()
+            vector = model.get_comment_tf_idf_vector([text_cleaned])            
+            print  i + "}"             
+            for i in fileClassifiers:
+                supClass = load_data_from_disk(i)
+                classifier = SC()
+                classifier.set_classifier(supClass)
+                result = classifier.classify(vector)
+                print result[0][0]+"#" ,
+            print ""
+'''
+
+
