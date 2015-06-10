@@ -12,7 +12,7 @@ from Settings import corpus_train1 as train1 , corpus_train2 as train2 , corpus_
 from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3 , labeled2 , labeled3 , labeled
 from Settings import  pcorpus_train1 as ptrain1
 from Settings import allVectorizer, allVectorizerTFIDF, allModelTFIDF 
-from Settings import allSVM, allNB, allME, allDT 
+from Settings import allSVM, allNB, allME, allDT, allRF 
 from Utils import compress , expand , get_polarity_from_file , show_classification_report , get_comments_from_file
 from VectorModel import VectorModel as VM
 from Classifier import SupervisedClassifier as SC
@@ -129,8 +129,8 @@ class Manager(object):
         labels = []
         for i in self.__trainData:
             labels.append(i[1])            
-        fileClassifiers = [allSVM, allNB, allME, allDT]
-        for i in range(4):            
+        fileClassifiers = [allSVM, allNB, allME, allDT, allRF]
+        for i in range(5):            
             classifier = SC(data_expanded, labels, i+1)
             fClass = classifier.train()                                 
             write_data_to_disk(fileClassifiers[i], fClass)
@@ -169,7 +169,7 @@ class Manager(object):
         model.set_models(vectorizer, transformer)    
         reader = Reader(test_data, 3)
         test_comments = reader.read()                
-        fileClassifiers = [allSVM, allNB, allME, allDT]        
+        fileClassifiers = [allSVM, allNB, allME, allDT, allRF]        
         true_labels = get_polarity_from_file(labeled)        
         all_labels_predicted = []                            
         for i in fileClassifiers:
@@ -264,10 +264,8 @@ class Manager(object):
 
 if __name__ == '__main__':
     
-    obj = Manager()
-    test = ["Altozano tras la presentación de su libro 101 españoles y Dios. Divertido, emocionante y brillante." , "Mañana en Gaceta: TVE, la que pagamos tú y yo, culpa a una becaria de su falsa información sobre el cierre de @gaceta" , "Más mañana en Gaceta. Amaiur depende de Uxue Barkos para crear grupo propio. ERC no cumple el req. del 15% y el PNV no quiere competencia", "Dado q la deuda privada es superior a la publica, el recorte del gasto privado tiene q ser superior al del gasto publico. Xq nadie protesta?", "Portada El Mundo http://t.co/3EZnkcyL ...", "Tras un año, constato: a las 7 d la mañana, cuando paseo a la perra x mi barrio, 8 d cada 10 personas con las q me cruzo, son mujeres."]
-    
-    #obj.testClassifiersFirstStage(test1)
+    obj = Manager()        
+    obj.testClassifiersFirstStage(test1)
     
     
     ''' Training first stage'''
@@ -275,6 +273,6 @@ if __name__ == '__main__':
     #obj.trainClassifiersFirstStage()
     
     ''' Training second stage '''
-    obj.prepareModelsSecondStage()
-    obj.trainClassifiersSecondStage() 
+    #obj.prepareModelsSecondStage()
+    #obj.trainClassifiersSecondStage() 
     
