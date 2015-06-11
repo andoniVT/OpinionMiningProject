@@ -12,7 +12,7 @@ from Settings import corpus_train1 as train1 , corpus_train2 as train2 , corpus_
 from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3 , labeled2 , labeled3 , labeled
 from Settings import  pcorpus_train1 as ptrain1
 from Settings import allVectorizer, allVectorizerTFIDF, allModelTFIDF 
-from Settings import allSVM, allNB, allME, allDT, allRF 
+from Settings import allSVM, allNB, allME, allDT, allRF , allAB 
 from Utils import compress , expand , get_polarity_from_file , show_classification_report , get_comments_from_file
 from VectorModel import VectorModel as VM
 from Classifier import SupervisedClassifier as SC
@@ -129,11 +129,17 @@ class Manager(object):
         labels = []
         for i in self.__trainData:
             labels.append(i[1])            
-        fileClassifiers = [allSVM, allNB, allME, allDT, allRF]
-        for i in range(5):            
+        fileClassifiers = [allSVM, allNB, allME, allDT, allRF, allAB]
+        '''        
+        for i in range(6):            
             classifier = SC(data_expanded, labels, i+1)
             fClass = classifier.train()                                 
             write_data_to_disk(fileClassifiers[i], fClass)
+        '''
+        classifier = SC(data_expanded, labels, 6)
+        fClass = classifier.train()                                 
+        write_data_to_disk(fileClassifiers[5], fClass)
+        
     
     def trainClassifiersSecondStage(self):
         data = load_data_from_disk(pnneuModelTFIDF)
@@ -169,7 +175,7 @@ class Manager(object):
         model.set_models(vectorizer, transformer)    
         reader = Reader(test_data, 3)
         test_comments = reader.read()                
-        fileClassifiers = [allSVM, allNB, allME, allDT, allRF]        
+        fileClassifiers = [allSVM, allNB, allME, allDT, allRF, allAB]        
         true_labels = get_polarity_from_file(labeled)        
         all_labels_predicted = []                            
         for i in fileClassifiers:
@@ -265,12 +271,12 @@ class Manager(object):
 if __name__ == '__main__':
     
     obj = Manager()        
-    obj.testClassifiersFirstStage(test1)
+    #obj.testClassifiersFirstStage(test1)
     
     
     ''' Training first stage'''
     #obj.prepareModelsFirstStage()
-    #obj.trainClassifiersFirstStage()
+    obj.trainClassifiersFirstStage()
     
     ''' Training second stage '''
     #obj.prepareModelsSecondStage()

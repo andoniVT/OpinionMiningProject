@@ -51,6 +51,7 @@ allNB = "Classifiers/all/NB.pk1"
 allME = "Classifiers/all/ME.pk1"
 allDT = "Classifiers/all/DT.pk1"
 allRF = "Classifiers/all/RF.pk1"
+allAB = "Classifiers/all/AB.pk1"
 
 pnneuSVM = "Classifiers/p-n-neu/SVM.pk1"
 pnneuNB = "Classifiers/p-n-neu/NB.pk1"

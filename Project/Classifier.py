@@ -8,7 +8,8 @@ from sklearn.naive_bayes import MultinomialNB as NB
 from sklearn.tree import DecisionTreeClassifier as DT
 from sklearn.linear_model import LogisticRegression as ME
 from sklearn.ensemble import RandomForestClassifier as RF
-
+from sklearn.ensemble import AdaBoostClassifier as AB
+from sklearn.svm import SVC
 
 class SupervisedClassifier(object):
     
@@ -27,8 +28,10 @@ class SupervisedClassifier(object):
             return self.__trainME()
         elif self.__type == 4:
             return self.__trainDT()
-        else:
+        elif self.__type == 5:
             return self.__trainRF()
+        else:
+            return self.__trainAB()
     
     def __trainSVM(self):
         print "Training Support Vector Machine"
@@ -60,11 +63,29 @@ class SupervisedClassifier(object):
         return classifier
     
     def __trainRF(self):
-        print "Random Forest Classifier"
+        print "Training Random Forest Classifier"
         classifier = RF(n_estimators=10)
         classifier = classifier.fit(self.__data, self.__labels)
         self.__classifier = classifier
         return classifier
+    
+    def __trainAB(self):
+        print "Training AdaBoost Classifier"
+        learning_rate = 1.
+        n_estimators = 20 
+        svm =  SVC(kernel="linear", C=0.025)
+        svm.fit(self.__data, self.__labels)
+        classifier = AB(
+                        base_estimator = svm ,
+                        learning_rate=learning_rate,
+                        n_estimators=n_estimators,
+                        algorithm="SAMME"
+                        )                
+        classifier = classifier.fit(self.__data, self.__labels)
+        self.__classifier = classifier
+        return classifier
+        
+        
     
     def classify(self, test_data):
         predictions = []
@@ -83,7 +104,7 @@ if __name__ == '__main__':
     data = [[1,2,3], [4,5,6],[3,2,1],[6,5,4],[2,5,8]]
     labels = [1,1,0,0,1]
     
-    obj = SupervisedClassifier(data, labels,5)
+    obj = SupervisedClassifier(data, labels,6)
     obj.train()
     
     test = [[1,2,3],[3,2,1]]
