@@ -67,11 +67,56 @@ pnnoneDT = "Classifiers/p-n-none/DT.pk1"
 
 
 
-''' results '''
-firstResultsSVM1000 = "Results/firstStage/run1-testSVM1000.txt"
-firstResultsNB1000 = "Results/firstStage/run1-testNB1000.txt"
-firstResultsME1000 = "Results/firstStage/run1-testME1000.txt"
-firstResultsDT1000 = "Results/firstStage/run1-testDT1000.txt"
+''' results 4 classes'''
+firstResultsSVM1000 = "Results/results_4classes/firstStage/run1-testSVM1000.txt"
+firstResultsNB1000 = "Results/results_4classes/firstStage/run1-testNB1000.txt"
+firstResultsME1000 = "Results/results_4classes/firstStage/run1-testME1000.txt"
+firstResultsDT1000 = "Results/results_4classes/firstStage/run1-testDT1000.txt"
+firstResultsRF1000 = "Results/results_4classes/firstStage/run1-testRF1000.txt"
+secondResultsSVM1000 = "Results/results_4classes/secondStage/run2-testSVM1000.txt"
+secondResultsNB1000 = "Results/results_4classes/secondStage/run2-testNB1000.txt"
+secondResultsME1000 = "Results/results_4classes/secondStage/run2-testME1000.txt"
+secondResultsDT1000 = "Results/results_4classes/secondStage/run2-testDT1000.txt"
+secondResultsRF1000 = "Results/results_4classes/secondStage/run2-testRF1000.txt"
+thirdResultsNaiveVoting1000 = "Results/results_4classes/thirdStage/run3-testNV1000.txt"
+
+firstResultsSVM60000 = "Results/results_4classes/firstStage/run1-testSVM60000.txt"
+firstResultsNB60000 = "Results/results_4classes/firstStage/run1-testNB60000.txt"
+firstResultsME60000 = "Results/results_4classes/firstStage/run1-testME60000.txt"
+firstResultsDT60000 = "Results/results_4classes/firstStage/run1-testDT60000.txt"
+firstResultsRF60000 = "Results/results_4classes/firstStage/run1-testRF60000.txt"
+secondResultsSVM60000 = "Results/results_4classes/secondStage/run2-testSVM60000.txt"
+secondResultsNB60000 = "Results/results_4classes/secondStage/run2-testNB60000.txt"
+secondResultsME60000 = "Results/results_4classes/secondStage/run2-testME60000.txt"
+secondResultsDT60000 = "Results/results_4classes/secondStage/run2-testDT60000.txt"
+secondResultsRF60000 = "Results/results_4classes/secondStage/run2-testRF60000.txt"
+thirdResultsNaiveVoting60000 = "Results/results_4classes/thirdStage/run3-testNV60000.txt"
+
+''' results 3 classes '''
+threeClassFirstResultsSVM1000 = "Results/results_3classes/firstStage/run1-testSVM1000.txt"
+threeClassFirstResultsNB1000 = "Results/results_3classes/firstStage/run1-testNB1000.txt"
+threeClassFirstResultsME1000 = "Results/results_3classes/firstStage/run1-testME1000.txt"
+threeClassFirstResultsDT1000 = "Results/results_3classes/firstStage/run1-testDT1000.txt"
+threeClassFirstResultsRF1000 = "Results/results_3classes/firstStage/run1-testRF1000.txt"
+threeClassSecondResultsSVM1000 = "Results/results_3classes/secondStage/run2-testSVM1000.txt"
+threeClassSecondResultsNB1000 = "Results/results_3classes/secondStage/run2-testNB1000.txt"
+threeClassSecondResultsME1000 = "Results/results_3classes/secondStage/run2-testME1000.txt"
+threeClassSecondResultsDT1000 = "Results/results_3classes/secondStage/run2-testDT1000.txt"
+threeClassSecondResultsRF1000 = "Results/results_3classes/secondStage/run2-testRF1000.txt"
+threeClassThirdResultsNaiveVoting1000 = "results_3classes/thirdStage/run3-testNV1000.txt"
+
+firstResultsSVM60000 = "Results/results_3classes/firstStage/run1-testSVM60000.txt"
+firstResultsNB60000 = "Results/results_3classes/firstStage/run1-testNB60000.txt"
+firstResultsME60000 = "Results/results_3classes/firstStage/run1-testME60000.txt"
+firstResultsDT60000 = "Results/results_3classes/firstStage/run1-testDT60000.txt"
+firstResultsRF60000 = "Results/results_3classes/firstStage/run1-testRF60000.txt"
+secondResultsSVM60000 = "Results/results_3classes/secondStage/run2-testSVM60000.txt"
+secondResultsNB60000 = "Results/results_3classes/secondStage/run2-testNB60000.txt"
+secondResultsME60000 = "Results/results_3classes/secondStage/run2-testME60000.txt"
+secondResultsDT60000 = "Results/results_3classes/secondStage/run2-testDT60000.txt"
+secondResultsRF60000 = "Results/results_3classes/secondStage/run2-testRF60000.txt"
+thirdResultsNaiveVoting60000 = "Results/Results/thirdStage/run3-testNV60000.txt"
+
 
 
 

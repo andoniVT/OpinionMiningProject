@@ -23,7 +23,7 @@ from Settings import pnneuVectorizer, pnneuVectorizerTFIDF, pnneuModelTFIDF
 from Settings import pnnoneVectorizer, pnnoneVectorizerTFIDF, pnnoneModelTFIDF  
 from Settings import pnnoneSVM, pnnoneNB, pnnoneME, pnnoneDT
 from Settings import pnneuSVM, pnneuNB, pnneuME, pnneuDT 
-from Settings import firstResultsSVM1000 , firstResultsNB1000, firstResultsME1000, firstResultsDT1000 
+from Settings import firstResultsSVM1000 , firstResultsNB1000, firstResultsME1000, firstResultsDT1000, firstResultsRF1000  
 
 class Manager(object):
     
@@ -192,7 +192,7 @@ class Manager(object):
             print "ok"
             all_labels_predicted.append(labels)
         
-        fileResults = [firstResultsSVM1000, firstResultsNB1000, firstResultsME1000, firstResultsDT1000]
+        fileResults = [firstResultsSVM1000, firstResultsNB1000, firstResultsME1000, firstResultsDT1000, firstResultsRF1000]
         for i in range(len(fileResults)):
             generate_resultsFile(fileResults[i], test_ids, all_labels_predicted[i])
         return all_labels_predicted    
