@@ -18,11 +18,6 @@ corpus_test1 = "Data/general-tweets-test1k.xml"
 corpus_test2 = "Data/general-tweets-test.xml"
 corpus_test3 = "Data/socialtv-tweets-test.xml"
 
-
-
-
-
-
 ''' corpus proccesed '''
 pcorpus_train1 = "Data/general-tweets-train-tagged-proccesed.xml"
 
@@ -44,7 +39,24 @@ pnneuModelTFIDF = "Models/p-n-neu/tfidfModel.pk1"
 pnnoneVectorizer = "Models/p-n-none/simpleVectorizer.pk1"
 pnnoneVectorizerTFIDF = "Models/p-n-none/tfidfVectorizer.pk1"
 pnnoneModelTFIDF = "Models/p-n-none/tfidfModel.pk1"
-  
+
+
+allVectorizer3C = "Models/all/simpleVectorizer3C.pk1"
+allVectorizerTFIDF3C = "Models/all/tfidfVectorizer3C.pk1"
+allModelTFIDF3C = "Models/all/tfidfModel3C.pk1"
+
+pnVectorizer3C = "Models/p-n/simpleVectorizer3C.pk1"
+pnVectorizerTFIDF3C = "Models/p-n/tfidfVectorizer3C.pk1"
+pnModelTFIDF3C = "Models/p-n/tfidfModel3C.pk1"
+
+pneuVectorizer3C = "Models/p-neu/simpleVectorizer3C.pk1"
+pneuVectorizerTFIDF3C = "Models/p-neu/tfidfVectorizer3C.pk1"
+pneuModelTFIDF3C = "Models/p-neu/tfidfModel3C.pk1"
+
+nneuVectorizer3C = "Models/n-neu/simpleVectorizer3C.pk1"
+nneuVectorizerTFIDF3C = "Models/n-neu/tfidfVectorizer3C.pk1"
+nneuModelTFIDF3C = "Models/n-neu/tfidfModel3C.pk1"
+
 
 ''' classifiers '''
 allSVM = "Classifiers/all/SVM.pk1"
@@ -65,31 +77,29 @@ pnnoneME = "Classifiers/p-n-none/ME.pk1"
 pnnoneDT = "Classifiers/p-n-none/DT.pk1"
 pnnoneRF = "Classifiers/p-n-none/RF.pk1"
 
+allSVM3C = "Classifiers/all/SVM3C.pk1"
+allNB3C = "Classifiers/all/NB3C.pk1"
+allME3C = "Classifiers/all/ME3C.pk1"
+allDT3C = "Classifiers/all/DT3C.pk1"
+allRF3C = "Classifiers/all/RF3C.pk1"
 
+pnSVM = "Classifiers/p-n/SVM3C.pk1"
+pnNB = "Classifiers/p-n/NB3C.pk1"
+pnME = "Classifiers/p-n/ME3C.pk1"
+pnDT = "Classifiers/p-n/DT3C.pk1"
+pnRF = "Classifiers/p-n/RF3C.pk1"
 
-allSVM3C = "Classifiers3C/all/SVM.pk1"
-allNB3C = "Classifiers3C/all/NB.pk1"
-allME3C = "Classifiers3C/all/ME.pk1"
-allDT3C = "Classifiers3C/all/DT.pk1"
-allRF3C = "Classifiers3C/all/RF.pk1"
+pneuSVM = "Classifiers/p-neu/SVM3C.pk1"
+pneuNB = "Classifiers/p-neu/NB3C.pk1"
+pneuME = "Classifiers/p-neu/ME3C.pk1"
+pneuDT = "Classifiers/p-neu/DT3C.pk1"
+pneuRF = "Classifiers/p-neu/RF3C.pk1"
 
-pnSVM = "Classifiers3C/p-n/SVM.pk1"
-pnNB = "Classifiers3C/p-n/NB.pk1"
-pnME = "Classifiers3C/p-n/ME.pk1"
-pnDT = "Classifiers3C/p-n/DT.pk1"
-pnRF = "Classifiers3C/p-n/RF.pk1"
-
-pneuSVM = "Classifiers3C/p-neu/SVM.pk1"
-pneuNB = "Classifiers3C/p-neu/NB.pk1"
-pneuME = "Classifiers3C/p-neu/ME.pk1"
-pneuDT = "Classifiers3C/p-neu/DT.pk1"
-pneuRF = "Classifiers3C/p-neu/RF.pk1"
-
-nneuSVM = "Classifiers3C/n-neu/SVM.pk1"
-nneuSVM = "Classifiers3C/n-neu/NB.pk1"
-nneuSVM = "Classifiers3C/n-neu/ME.pk1"
-nneuSVM = "Classifiers3C/n-neu/DT.pk1"
-nneuSVM = "Classifiers3C/n-neu/RF.pk1"
+nneuSVM = "Classifiers/n-neu/SVM3C.pk1"
+nneuSVM = "Classifiers/n-neu/NB3C.pk1"
+nneuSVM = "Classifiers/n-neu/ME3C.pk1"
+nneuSVM = "Classifiers/n-neu/DT3C.pk1"
+nneuSVM = "Classifiers/n-neu/RF3C.pk1"
 
 
 ''' results 4 classes'''
@@ -141,7 +151,3 @@ secondResultsME60000 = "Results/results_3classes/secondStage/run2-testME60000.tx
 secondResultsDT60000 = "Results/results_3classes/secondStage/run2-testDT60000.txt"
 secondResultsRF60000 = "Results/results_3classes/secondStage/run2-testRF60000.txt"
 thirdResultsNaiveVoting60000 = "Results/Results/thirdStage/run3-testNV60000.txt"
-
-
-
-
