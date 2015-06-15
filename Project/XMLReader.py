@@ -56,11 +56,14 @@ class Reader(object):
     def __readType3(self):
         tree = ET.parse(self.__file)
         root = tree.getroot()
-        dictionary = []
+        ids = []
+        dictionary = []        
         for child in root:
+            tweet_id = child[0].text             
             content = child[2].text            
-            dictionary.append(content)          
-        return dictionary
+            dictionary.append(content)
+            ids.append(tweet_id)          
+        return [ids ,dictionary]
             
     def __readType4(self):
         tree = ET.parse(self.__file)

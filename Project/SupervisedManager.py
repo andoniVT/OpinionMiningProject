@@ -12,17 +12,18 @@ from Settings import corpus_train1 as train1 , corpus_train2 as train2 , corpus_
 from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3 , labeled2 , labeled3 , labeled
 from Settings import  pcorpus_train1 as ptrain1
 from Settings import allVectorizer, allVectorizerTFIDF, allModelTFIDF 
-from Settings import allSVM, allNB, allME, allDT, allRF , allAB 
+from Settings import allSVM, allNB, allME, allDT, allRF  
 from Utils import compress , expand , get_polarity_from_file , show_classification_report , get_comments_from_file
 from VectorModel import VectorModel as VM
 from Classifier import SupervisedClassifier as SC
-from Utils import write_data_to_disk , load_data_from_disk
+from Utils import write_data_to_disk , load_data_from_disk , generate_resultsFile
 import os.path
 
 from Settings import pnneuVectorizer, pnneuVectorizerTFIDF, pnneuModelTFIDF 
 from Settings import pnnoneVectorizer, pnnoneVectorizerTFIDF, pnnoneModelTFIDF  
 from Settings import pnnoneSVM, pnnoneNB, pnnoneME, pnnoneDT
-from Settings import pnneuSVM, pnneuNB, pnneuME, pnneuDT
+from Settings import pnneuSVM, pnneuNB, pnneuME, pnneuDT 
+from Settings import firstResultsSVM1000 , firstResultsNB1000, firstResultsME1000, firstResultsDT1000 
 
 class Manager(object):
     
@@ -129,18 +130,13 @@ class Manager(object):
         labels = []
         for i in self.__trainData:
             labels.append(i[1])            
-        fileClassifiers = [allSVM, allNB, allME, allDT, allRF, allAB]
-        '''        
-        for i in range(6):            
+        fileClassifiers = [allSVM, allNB, allME, allDT, allRF]
+                
+        for i in range(5):            
             classifier = SC(data_expanded, labels, i+1)
             fClass = classifier.train()                                 
             write_data_to_disk(fileClassifiers[i], fClass)
-        '''
-        classifier = SC(data_expanded, labels, 6)
-        fClass = classifier.train()                                 
-        write_data_to_disk(fileClassifiers[5], fClass)
-        
-    
+                    
     def trainClassifiersSecondStage(self):
         data = load_data_from_disk(pnneuModelTFIDF)
         data2 = load_data_from_disk(pnnoneModelTFIDF)
@@ -174,24 +170,31 @@ class Manager(object):
         model = VM()
         model.set_models(vectorizer, transformer)    
         reader = Reader(test_data, 3)
-        test_comments = reader.read()                
-        fileClassifiers = [allSVM, allNB, allME, allDT, allRF, allAB]        
-        true_labels = get_polarity_from_file(labeled)        
+        allDataTest = reader.read()
+        test_ids = allDataTest[0]
+        test_comments = allDataTest[1]                        
+        fileClassifiers = [allSVM, allNB, allME, allDT, allRF]        
+        #true_labels = get_polarity_from_file(labeled)        
         all_labels_predicted = []                            
         for i in fileClassifiers:
             supClass = load_data_from_disk(i)
             classifier = SC()
             classifier.set_classifier(supClass)
             labels = []
-            for j in range(len(true_labels)):
+            #for j in range(len(true_labels)):
+            for j in range(len(test_comments)):
                 proc = TextCleaner(test_comments[j])
                 text_cleaned = proc.get_processed_comment()
                 vector = model.get_comment_tf_idf_vector([text_cleaned])
                 result = classifier.classify(vector)            
                 labels.append(result[0][0])
-            show_classification_report(true_labels, labels)
+            #show_classification_report(true_labels, labels)
             print "ok"
             all_labels_predicted.append(labels)
+        
+        fileResults = [firstResultsSVM1000, firstResultsNB1000, firstResultsME1000, firstResultsDT1000]
+        for i in range(len(fileResults)):
+            generate_resultsFile(fileResults[i], test_ids, all_labels_predicted[i])
         return all_labels_predicted    
         
     
@@ -271,12 +274,12 @@ class Manager(object):
 if __name__ == '__main__':
     
     obj = Manager()        
-    #obj.testClassifiersFirstStage(test1)
+    obj.testClassifiersFirstStage(test1)
     
     
     ''' Training first stage'''
     #obj.prepareModelsFirstStage()
-    obj.trainClassifiersFirstStage()
+    #obj.trainClassifiersFirstStage()
     
     ''' Training second stage '''
     #obj.prepareModelsSecondStage()

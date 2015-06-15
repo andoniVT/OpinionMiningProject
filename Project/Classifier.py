@@ -8,7 +8,6 @@ from sklearn.naive_bayes import MultinomialNB as NB
 from sklearn.tree import DecisionTreeClassifier as DT
 from sklearn.linear_model import LogisticRegression as ME
 from sklearn.ensemble import RandomForestClassifier as RF
-from sklearn.ensemble import AdaBoostClassifier as AB
 from sklearn.svm import SVC
 
 class SupervisedClassifier(object):
@@ -30,9 +29,7 @@ class SupervisedClassifier(object):
             return self.__trainDT()
         elif self.__type == 5:
             return self.__trainRF()
-        else:
-            return self.__trainAB()
-    
+            
     def __trainSVM(self):
         print "Training Support Vector Machine"
         classifier = SVM()
@@ -67,25 +64,7 @@ class SupervisedClassifier(object):
         classifier = RF(n_estimators=10)
         classifier = classifier.fit(self.__data, self.__labels)
         self.__classifier = classifier
-        return classifier
-    
-    def __trainAB(self):
-        print "Training AdaBoost Classifier"
-        learning_rate = 1.
-        n_estimators = 20 
-        svm =  SVC(kernel="linear", C=0.025)
-        svm.fit(self.__data, self.__labels)
-        classifier = AB(
-                        base_estimator = svm ,
-                        learning_rate=learning_rate,
-                        n_estimators=n_estimators,
-                        algorithm="SAMME"
-                        )                
-        classifier = classifier.fit(self.__data, self.__labels)
-        self.__classifier = classifier
-        return classifier
-        
-        
+        return classifier     
     
     def classify(self, test_data):
         predictions = []

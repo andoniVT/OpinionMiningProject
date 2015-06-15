@@ -15,8 +15,9 @@ corpus_train1a =  "Data/nuevoTrainPrueba.xml"
 corpus_train2 = "Data/socialtv-tweets-train-tagged.xml"
 
 corpus_test1 = "Data/general-tweets-test1k.xml"
-corpus_test2 = "Data/socialtv-tweets-test.xml"
-corpus_test3 = "Data/general-tweets-test.xml"
+corpus_test2 = "Data/general-tweets-test.xml"
+corpus_test3 = "Data/socialtv-tweets-test.xml"
+
 
 
 
@@ -67,26 +68,10 @@ pnnoneDT = "Classifiers/p-n-none/DT.pk1"
 
 
 ''' results '''
-firstResults = "Results/firstStage/results.txt"
+firstResultsSVM1000 = "Results/firstStage/run1-testSVM1000.txt"
+firstResultsNB1000 = "Results/firstStage/run1-testNB1000.txt"
+firstResultsME1000 = "Results/firstStage/run1-testME1000.txt"
+firstResultsDT1000 = "Results/firstStage/run1-testDT1000.txt"
 
-
-
-
-
-
-'''
-        for i in test_comments:
-            proc = TextCleaner(i)
-            text_cleaned = proc.get_processed_comment()
-            vector = model.get_comment_tf_idf_vector([text_cleaned])            
-            print  i + "}"             
-            for i in fileClassifiers:
-                supClass = load_data_from_disk(i)
-                classifier = SC()
-                classifier.set_classifier(supClass)
-                result = classifier.classify(vector)
-                print result[0][0]+"#" ,
-            print ""
-'''
 
 

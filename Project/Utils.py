@@ -141,26 +141,17 @@ def auxiliar():
     print "NONES"
     for i in nones_test:
         print i[0] + "}" + i[1]
-    
-    
 
+def generate_resultsFile(file,ids, labels):
+    file_to_write = open(file, 'w')
+    for i in range(len(ids)):
+        line = ids[i] + "\t" + labels[i] + "\n"
+        file_to_write.write(line)
+    
 if __name__ == '__main__':
     
-    y_true = ["P" , "P" , "N" , "NONE" , "NEU"]
-    y_predicted = ["P" , "P" , "N" , "NONE" , "NEU"]
-    
-    #y_true = [1.0 , 1.0 , -1.0 , 0.0 , 0.5]
-    #y_predicted = [1.0 , -1.0 , 0.0 , 0.0 , -1.0]
-    
-    #show_classification_report(y_true, y_predicted)
-    contenido = ["hola que bueno" , "que malo"]
-    valores = ["P" , "N"]
-    
-    #generar_xml(contenido, valores)
-    
-    lines = get_comments_from_file(labeled3)
-    for i in lines:
-        print i
-    
-    
+    file = "testFile.txt"
+    ids = ["123" , "456", "789"]
+    labels = ["P" , "P", "N"]
+    generate_resultsFile(file, ids, labels)
     
