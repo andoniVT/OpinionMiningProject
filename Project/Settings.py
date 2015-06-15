@@ -52,19 +52,44 @@ allNB = "Classifiers/all/NB.pk1"
 allME = "Classifiers/all/ME.pk1"
 allDT = "Classifiers/all/DT.pk1"
 allRF = "Classifiers/all/RF.pk1"
-allAB = "Classifiers/all/AB.pk1"
 
 pnneuSVM = "Classifiers/p-n-neu/SVM.pk1"
 pnneuNB = "Classifiers/p-n-neu/NB.pk1"
 pnneuME = "Classifiers/p-n-neu/ME.pk1"
 pnneuDT = "Classifiers/p-n-neu/DT.pk1"
+pnneuRF = "Classifiers/p-n-neu/RF.pk1"
 
 pnnoneSVM = "Classifiers/p-n-none/SVM.pk1"
 pnnoneNB = "Classifiers/p-n-none/NB.pk1"
 pnnoneME = "Classifiers/p-n-none/ME.pk1"
 pnnoneDT = "Classifiers/p-n-none/DT.pk1"
+pnnoneRF = "Classifiers/p-n-none/RF.pk1"
 
 
+
+allSVM3C = "Classifiers3C/all/SVM.pk1"
+allNB3C = "Classifiers3C/all/NB.pk1"
+allME3C = "Classifiers3C/all/ME.pk1"
+allDT3C = "Classifiers3C/all/DT.pk1"
+allRF3C = "Classifiers3C/all/RF.pk1"
+
+pnSVM = "Classifiers3C/p-n/SVM.pk1"
+pnNB = "Classifiers3C/p-n/NB.pk1"
+pnME = "Classifiers3C/p-n/ME.pk1"
+pnDT = "Classifiers3C/p-n/DT.pk1"
+pnRF = "Classifiers3C/p-n/RF.pk1"
+
+pneuSVM = "Classifiers3C/p-neu/SVM.pk1"
+pneuNB = "Classifiers3C/p-neu/NB.pk1"
+pneuME = "Classifiers3C/p-neu/ME.pk1"
+pneuDT = "Classifiers3C/p-neu/DT.pk1"
+pneuRF = "Classifiers3C/p-neu/RF.pk1"
+
+nneuSVM = "Classifiers3C/n-neu/SVM.pk1"
+nneuSVM = "Classifiers3C/n-neu/NB.pk1"
+nneuSVM = "Classifiers3C/n-neu/ME.pk1"
+nneuSVM = "Classifiers3C/n-neu/DT.pk1"
+nneuSVM = "Classifiers3C/n-neu/RF.pk1"
 
 
 ''' results 4 classes'''

@@ -20,7 +20,7 @@ class SentimentManager(object):
     def trainSecondStage(self):
         self.__supManager.prepareModelsSecondStage()
         self.__supManager.trainClassifiersSecondStage()
-    
+            
     def testFirstStage(self, test_data):
         self.__supManager.testClassifiersFirstStage(test_data)
     
@@ -31,7 +31,23 @@ class SentimentManager(object):
         pass 
     
     def testVotingSystemSS(self, test_data):
+        pass
+    
+    
+    def trainFirstStage3classes(self):
+        pass
+    
+    def trainSecondStage3classes(self):
         pass 
+    
+    def testFirstStage3classes(self, test_data):
+        pass 
+    
+    def testSecondStage3classes(self, test_data):
+        pass 
+    
+    def testVotingSystem3classes(self, test_data):
+        pass  
     
     
 
