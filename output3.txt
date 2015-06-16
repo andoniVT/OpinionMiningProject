@@ -1,72 +1,70 @@
-             precision    recall  f1-score   support
-
-          N       0.46      0.65      0.54       239
-        NEU       0.29      0.14      0.19        88
-       NONE       0.67      0.44      0.53       271
-          P       0.64      0.70      0.67       402
-
-avg / total       0.57      0.57      0.56      1000
-
-[[156  16  16  51]
- [ 43  12   5  28]
- [ 66   5 119  81]
- [ 75   8  37 282]]
+ok
+ok
+ok
+ok
 ok
              precision    recall  f1-score   support
 
+          N       0.48      0.67      0.56       239
+        NEU       0.20      0.14      0.16        88
+       NONE       0.66      0.43      0.52       271
+          P       0.64      0.69      0.66       402
+
+avg / total       0.57      0.56      0.56      1000
+
+[[159  20  11  49]
+ [ 43  12   9  24]
+ [ 64   7 117  83]
+ [ 64  22  39 277]]
+             precision    recall  f1-score   support
+
           N       0.46      0.65      0.54       239
-        NEU       0.00      0.00      0.00        88
-       NONE       0.94      0.11      0.19       271
+        NEU       0.29      0.02      0.04        88
+       NONE       0.91      0.11      0.19       271
           P       0.55      0.86      0.67       402
 
-avg / total       0.58      0.53      0.45      1000
+avg / total       0.60      0.53      0.45      1000
 
-/usr/local/lib/python2.7/dist-packages/scikit_learn-0.14.1-py2.7-linux-x86_64.egg/sklearn/metrics/metrics.py:1905: UserWarning: The sum of true positives and false positives are equal to zero for some labels. Precision is ill defined for those labels ['NEU']. The precision and recall are equal to zero for some labels. fbeta_score is ill defined for those labels ['NEU']. 
-  average=None)
-[[156   0   1  82]
- [ 48   0   0  40]
- [ 81   0  29 161]
- [ 54   0   1 347]]
-ok
+[[156   2   1  80]
+ [ 47   2   1  38]
+ [ 83   1  29 158]
+ [ 55   2   1 344]]
              precision    recall  f1-score   support
 
           N       0.46      0.71      0.56       239
-        NEU       0.00      0.00      0.00        88
-       NONE       0.78      0.31      0.44       271
-          P       0.60      0.78      0.68       402
+        NEU       0.04      0.01      0.02        88
+       NONE       0.78      0.30      0.43       271
+          P       0.61      0.77      0.68       402
 
-avg / total       0.56      0.57      0.52      1000
+avg / total       0.57      0.56      0.53      1000
 
-[[170   0   5  64]
- [ 49   0   5  34]
- [ 78   0  83 110]
- [ 75   0  14 313]]
-ok
+[[169   4   4  62]
+ [ 48   1   6  33]
+ [ 77  12  80 102]
+ [ 70   9  12 311]]
              precision    recall  f1-score   support
 
-          N       0.41      0.46      0.43       239
-        NEU       0.17      0.16      0.17        88
-       NONE       0.55      0.53      0.54       271
-          P       0.61      0.60      0.60       402
+          N       0.44      0.40      0.42       239
+        NEU       0.13      0.31      0.18        88
+       NONE       0.51      0.47      0.49       271
+          P       0.68      0.53      0.60       402
 
-avg / total       0.51      0.51      0.51      1000
+avg / total       0.53      0.47      0.49      1000
 
-[[110  27  40  62]
- [ 39  14   6  29]
- [ 54  12 143  62]
- [ 64  27  71 240]]
-ok
+[[ 95  73  36  35]
+ [ 26  27  18  17]
+ [ 52  42 128  49]
+ [ 45  72  70 215]]
              precision    recall  f1-score   support
 
-          N       0.43      0.67      0.52       239
-        NEU       0.40      0.09      0.15        88
-       NONE       0.54      0.36      0.43       271
-          P       0.64      0.68      0.66       402
+          N       0.47      0.57      0.52       239
+        NEU       0.12      0.23      0.15        88
+       NONE       0.60      0.36      0.45       271
+          P       0.64      0.60      0.62       402
 
-avg / total       0.54      0.54      0.52      1000
+avg / total       0.54      0.50      0.51      1000
 
-[[159   9  26  45]
- [ 51   8   8  21]
- [ 85   0  97  89]
- [ 74   3  50 275]]
-ok
+[[136  50  14  39]
+ [ 38  20  10  20]
+ [ 58  38  98  77]
+ [ 56  63  40 243]]

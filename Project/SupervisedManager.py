@@ -21,10 +21,11 @@ import os.path
 
 from Settings import pnneuVectorizer, pnneuVectorizerTFIDF, pnneuModelTFIDF 
 from Settings import pnnoneVectorizer, pnnoneVectorizerTFIDF, pnnoneModelTFIDF  
-from Settings import pnnoneSVM, pnnoneNB, pnnoneME, pnnoneDT
-from Settings import pnneuSVM, pnneuNB, pnneuME, pnneuDT 
-from Settings import firstResultsSVM1000 , firstResultsNB1000, firstResultsME1000, firstResultsDT1000, firstResultsRF1000  
-
+from Settings import pnnoneSVM, pnnoneNB, pnnoneME, pnnoneDT, pnnoneRF
+from Settings import pnneuSVM, pnneuNB, pnneuME, pnneuDT, pnneuRF  
+from Settings import firstResultsSVM1000 , firstResultsNB1000, firstResultsME1000, firstResultsDT1000, firstResultsRF1000
+from Settings import secondResultsSVM1000, secondResultsNB1000, secondResultsME1000, secondResultsDT1000, secondResultsRF1000  
+from Settings import firstResultsSVM60000, firstResultsNB60000, firstResultsME60000, firstResultsDT60000, firstResultsRF60000
 class Manager(object):
     
     def __init__(self):
@@ -119,8 +120,14 @@ class Manager(object):
         write_data_to_disk(pnnoneVectorizer, modelVectorizer2)
         write_data_to_disk(pnnoneVectorizerTFIDF, modelVectorizerTFIDF2)
         write_data_to_disk(pnnoneModelTFIDF, modelTFIDF2)
-                      
-                                
+    
+    def prepareModelsFirstStage3C(self):
+        pass 
+    
+    def prepareModelsSecondStage3C(self):
+        pass
+    
+                                                      
     def trainClassifiersFirstStage(self):
         data = load_data_from_disk(allModelTFIDF)
         data_expanded = []
@@ -149,11 +156,11 @@ class Manager(object):
             vec = expand(i)
             data_expanded2.append(vec)
         
-        fileClassifiers = [pnneuSVM, pnneuNB, pnneuME, pnneuDT]
-        fileClassifiers2 = [pnnoneSVM, pnnoneNB, pnnoneME, pnnoneDT]
+        fileClassifiers = [pnneuSVM, pnneuNB, pnneuME, pnneuDT, pnneuRF]
+        fileClassifiers2 = [pnnoneSVM, pnnoneNB, pnnoneME, pnnoneDT, pnnoneRF]
         
         
-        for i in range(4):
+        for i in range(5):
             print "first classifier: "
             classifier = SC(data_expanded, self.__labelsPNNEU, i+1)
             fClass = classifier.train()
@@ -162,8 +169,13 @@ class Manager(object):
             classifier2 = SC(data_expanded2, self.__labelsPNEUNONE, i+1)
             fClass2 = classifier2.train()
             write_data_to_disk(fileClassifiers2[i], fClass2)
-                
     
+    def trainClassifiersFirstStage3C(self):
+        pass 
+    
+    def trainClassifiersSecondStage3C(self):
+        pass
+                    
     def testClassifiersFirstStage(self, test_data):
         vectorizer = load_data_from_disk(allVectorizer)
         transformer = load_data_from_disk(allVectorizerTFIDF)
@@ -174,7 +186,7 @@ class Manager(object):
         test_ids = allDataTest[0]
         test_comments = allDataTest[1]                        
         fileClassifiers = [allSVM, allNB, allME, allDT, allRF]        
-        true_labels = get_polarity_from_file(labeled)        
+        #true_labels = get_polarity_from_file(labeled)        
         all_labels_predicted = []                            
         for i in fileClassifiers:
             supClass = load_data_from_disk(i)
@@ -188,7 +200,7 @@ class Manager(object):
                 vector = model.get_comment_tf_idf_vector([text_cleaned])
                 result = classifier.classify(vector)            
                 labels.append(result[0][0])
-            show_classification_report(true_labels, labels)
+            #show_classification_report(true_labels, labels)
             print "ok"
             all_labels_predicted.append(labels)
         
@@ -211,11 +223,13 @@ class Manager(object):
         model2.set_models(vectorizer2, transformer2)
         
         reader = Reader(test_data, 3)
-        test_comments = reader.read()    
+        allDataTest = reader.read()
+        test_ids = allDataTest[0]
+        test_comments = allDataTest[1]            
         #true_labels = get_polarity_from_file(labeled)            
-        true_labels = get_polarity_from_file(labeled2)
-        fileClassifiers = [pnneuSVM, pnneuNB, pnneuME, pnneuDT]
-        fileClassifiers2 = [pnnoneSVM, pnnoneNB, pnnoneME, pnnoneDT]
+        #true_labels = get_polarity_from_file(labeled2)
+        fileClassifiers = [pnneuSVM, pnneuNB, pnneuME, pnneuDT, pnneuRF]
+        fileClassifiers2 = [pnnoneSVM, pnnoneNB, pnnoneME, pnnoneDT, pnnoneRF]
         
         labelsPNNEU = []
         labelsPNNONE = []
@@ -227,8 +241,11 @@ class Manager(object):
         supClass2 = load_data_from_disk(fileClassifiers2[typeClassifier-1])
         classifier2 = SC()
         classifier2.set_classifier(supClass2)
+        
+        
                 
-        for j in range(len(true_labels)):
+        #for j in range(len(true_labels)):
+        for j in range(len(test_comments)):
             proc = TextCleaner(test_comments[j])
             text_cleaned = proc.get_processed_comment()
             
@@ -265,16 +282,44 @@ class Manager(object):
     
     def testClassifiersSecondStage(self, test_data):
         all_labels = []
-        for i in range(4):
+        reader = Reader(test_data, 3)
+        allDataTest = reader.read()
+        test_ids = allDataTest[0]
+        for i in range(5):
             labels = self.classReduction(i+1, test_data)
-            all_labels.append(labels)            
+            all_labels.append(labels)
+            print "ok" 
+        
+        fileResults = []
+        if len(test_ids)==1000:        
+            fileResults = [secondResultsSVM1000, secondResultsNB1000, secondResultsME1000, secondResultsDT1000, secondResultsRF1000]
+        else:
+            fileResults = [firstResultsSVM60000, firstResultsNB60000, firstResultsME60000, firstResultsDT60000, firstResultsRF60000]
+            
+        for i in range(len(fileResults)):
+            generate_resultsFile(fileResults[i], test_ids, all_labels[i])           
         return all_labels
-                     
-
+    
+    def testClassifiersFirstStage3C(self, test_data):
+        pass
+    
+    def testClassifiersSecondStage3C(self, test_data):
+        pass 
+    
+                    
 if __name__ == '__main__':
     
     obj = Manager()        
-    obj.testClassifiersFirstStage(test1)
+    #obj.testClassifiersFirstStage(test1)
+    
+    true_labels = get_polarity_from_file(labeled)
+    labels =  obj.testClassifiersSecondStage(test1)
+    for i in labels:
+        show_classification_report(true_labels, i)
+    
+        
+    
+    
     
     
     ''' Training first stage'''
