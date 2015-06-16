@@ -27,11 +27,17 @@ class SentimentManager(object):
     def testSecondStage(self, test_data):
         pass
     
-    def testVotingSystemFS(self, test_data):
-        pass 
+    def testVotingSystemFS(self, test_data):        
+        labels = self.__supManager.testClassifiersFirstStage(test_data)
+        predictedSVM = labels[0]
+        predictedNB = labels[1]
+        predictedME = labels[2]
+        predictedDT = labels[3]
+        predictedRF = labels[4]        
+        voting = VotingSystem(test_data, predictedSVM, predictedNB, predictedME, predictedDT, predictedRF)
+        naive = voting.naiveVoting() 
     
-    def testVotingSystemSS(self, test_data):
-        pass
+    
     
     
     def trainFirstStage3classes(self):
@@ -54,7 +60,10 @@ class SentimentManager(object):
 if __name__ == '__main__':
     
     obj = SentimentManager()
-    obj.testFirstStage(test1000)    
+    obj.testFirstStage(test60798)
+    obj.testSecondStage(test60798)
+    obj.testVotingSystemFS(test60798)
+        
     
   
   

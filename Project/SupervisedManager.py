@@ -26,6 +26,7 @@ from Settings import pnneuSVM, pnneuNB, pnneuME, pnneuDT, pnneuRF
 from Settings import firstResultsSVM1000 , firstResultsNB1000, firstResultsME1000, firstResultsDT1000, firstResultsRF1000
 from Settings import secondResultsSVM1000, secondResultsNB1000, secondResultsME1000, secondResultsDT1000, secondResultsRF1000  
 from Settings import firstResultsSVM60000, firstResultsNB60000, firstResultsME60000, firstResultsDT60000, firstResultsRF60000
+
 class Manager(object):
     
     def __init__(self):
@@ -201,10 +202,14 @@ class Manager(object):
                 result = classifier.classify(vector)            
                 labels.append(result[0][0])
             #show_classification_report(true_labels, labels)
-            print "ok"
+            print "ok"            
             all_labels_predicted.append(labels)
-        
-        fileResults = [firstResultsSVM1000, firstResultsNB1000, firstResultsME1000, firstResultsDT1000, firstResultsRF1000]
+            fileResults = []
+        if len(test_ids)==1000:         
+            fileResults = [firstResultsSVM1000, firstResultsNB1000, firstResultsME1000, firstResultsDT1000, firstResultsRF1000]
+        else:
+            fileResults = [firstResultsSVM60000, firstResultsNB60000, firstResultsME60000, firstResultsDT60000, firstResultsRF60000]
+            
         for i in range(len(fileResults)):
             generate_resultsFile(fileResults[i], test_ids, all_labels_predicted[i])
         return all_labels_predicted    
