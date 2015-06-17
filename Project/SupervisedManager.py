@@ -9,7 +9,7 @@ from XMLReader import Reader
 from XMLWritter import Writter
 from TextCleaner import TextCleaner
 from Settings import corpus_train1 as train1 , corpus_train2 as train2 , corpus_train1a as train1a   
-from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3 , labeled2 , labeled3 , labeled
+from Settings import corpus_test1 as test1 , corpus_test2 as test2 , corpus_test3 as test3 , labeled2 , labeled3 , labeled , labeled3c
 from Settings import  pcorpus_train1 as ptrain1
 from Settings import allVectorizer, allVectorizerTFIDF, allModelTFIDF 
 from Settings import allSVM, allNB, allME, allDT, allRF  
@@ -30,6 +30,17 @@ from Settings import secondResultsSVM60000, secondResultsNB60000, secondResultsM
 
 from Settings import allVectorizer3C, allVectorizerTFIDF3C, allModelTFIDF3C
 from Settings import allSVM3C, allNB3C, allME3C, allDT3C, allRF3C
+from Settings import threeClassFirstResultsSVM1000, threeClassFirstResultsNB1000, threeClassFirstResultsME1000, threeClassFirstResultsDT1000, threeClassFirstResultsRF1000
+from Settings import threeClassFirstResultsSVM60000, threeClassFirstResultsNB60000, threeClassFirstResultsME60000, threeClassFirstResultsDT60000, threeClassFirstResultsRF60000
+from Settings import pnVectorizer3C, pnVectorizerTFIDF3C, pnModelTFIDF3C 
+from Settings import pneuVectorizer3C, pneuVectorizerTFIDF3C, pneuModelTFIDF3C
+from Settings import nneuVectorizer3C, nneuVectorizerTFIDF3C, nneuModelTFIDF3C
+from Settings import pnSVM, pnNB, pnME, pnDT, pnRF 
+from Settings import pneuSVM, pneuNB, pneuME, pneuDT, pneuRF
+from Settings import nneuSVM, nneuNB, nneuME, nneuDT, nneuRF
+          
+
+          
 
 
 class Manager(object):
@@ -153,8 +164,66 @@ class Manager(object):
         write_data_to_disk(allModelTFIDF3C, modelTFIDF) 
     
     def prepareModelsSecondStage3C(self):
-        pass
-    
+                
+        all_comments = []
+        all_labels = [] 
+        train_commentsP_N= []
+        train_commentsP_NEU= []
+        train_commentsN_NEU= []
+        
+        for i in self.__trainData:
+            if i[1]=="NONE":
+                all_comments.append(i[0])
+                all_labels.append("NEU")            
+            else :
+                all_comments.append(i[0])
+                all_labels.append(i[1])                
+        
+        for i in range(len(all_comments)):
+            if all_labels[i] == "P":
+                train_commentsP_N.append(all_comments[i])
+                train_commentsP_NEU.append(all_comments[i])
+                self.__labels3cPN.append(all_labels[i])
+                self.__labels3cPNEU.append(all_labels[i])
+            elif all_labels[i] == "N":
+                train_commentsP_N.append(all_comments[i])
+                train_commentsN_NEU.append(all_comments[i])
+                self.__labels3cPN.append(all_labels[i])
+                self.__labels3cNNEU.append(all_labels[i])
+            elif all_labels[i] == "NEU":
+                train_commentsP_NEU.append(all_comments[i])
+                train_commentsN_NEU.append(all_comments[i])
+                self.__labels3cPNEU.append(all_labels[i])
+                self.__labels3cNNEU.append(all_labels[i])
+                            
+        
+        model = VM(train_commentsP_N)
+        vectorModelData = model.prepare_models()
+        modelVectorizer = vectorModelData[0]
+        modelVectorizerTFIDF = vectorModelData[1]
+        modelTFIDF = vectorModelData[2]
+        write_data_to_disk(pnVectorizer3C, modelVectorizer)
+        write_data_to_disk(pnVectorizerTFIDF3C, modelVectorizerTFIDF)
+        write_data_to_disk(pnModelTFIDF3C, modelTFIDF)
+        
+        model2 = VM(train_commentsP_NEU)
+        vectorModelData2 = model2.prepare_models()
+        modelVectorizer2 = vectorModelData2[0]
+        modelVectorizerTFIDF2 = vectorModelData2[1]
+        modelTFIDF2 = vectorModelData2[2]
+        write_data_to_disk(pneuVectorizer3C, modelVectorizer2)
+        write_data_to_disk(pneuVectorizerTFIDF3C, modelVectorizerTFIDF2)
+        write_data_to_disk(pneuModelTFIDF3C, modelTFIDF2)
+        
+        model3 = VM(train_commentsN_NEU)
+        vectorModelData3 = model3.prepare_models()
+        modelVectorizer3 = vectorModelData3[0]
+        modelVectorizerTFIDF3 = vectorModelData3[1]
+        modelTFIDF3 = vectorModelData3[2]
+        write_data_to_disk(nneuVectorizer3C, modelVectorizer3)
+        write_data_to_disk(nneuVectorizerTFIDF3C, modelVectorizerTFIDF3)
+        write_data_to_disk(nneuModelTFIDF3C, modelTFIDF3)
+                
                                                       
     def trainClassifiersFirstStage(self):
         data = load_data_from_disk(allModelTFIDF)
@@ -214,7 +283,47 @@ class Manager(object):
             write_data_to_disk(fileClassifiers[i], fClass) 
     
     def trainClassifiersSecondStage3C(self):
-        pass
+        '''
+        pnVectorizer3C, pnVectorizerTFIDF3C,  
+        pneuVectorizer3C, pneuVectorizerTFIDF3C, 
+        nneuVectorizer3C, nneuVectorizerTFIDF3C, 
+        '''                
+        data = load_data_from_disk(pnModelTFIDF3C)
+        data2 = load_data_from_disk(pneuModelTFIDF3C)
+        data3 = load_data_from_disk(nneuModelTFIDF3C)
+                
+        data_expanded = []
+        data_expanded2 = []
+        data_expanded3 = []
+        
+        for i in data:
+            vec = expand(i)
+            data_expanded.append(vec)
+        for i in data2:
+            vec = expand(i)
+            data_expanded2.append(vec)
+        for i in data3:
+            vec = expand(i)
+            data_expanded3.append(vec)
+            
+        fileClassifiers = [pnSVM, pnNB, pnME, pnDT, pnRF]
+        fileClassifiers2 = [pneuSVM, pneuNB, pneuME, pneuDT, pneuRF]
+        fileClassifiers3 = [nneuSVM, nneuNB, nneuME, nneuDT, nneuRF]
+        
+        
+        for i in range(5):            
+            print "first classifier: "
+            classifier = SC(data_expanded, self.__labels3cPN, i+1)
+            fClass = classifier.train()
+            write_data_to_disk(fileClassifiers[i], fClass)
+            print "second classifier"
+            classifier2 = SC(data_expanded2, self.__labels3cPNEU, i+1)
+            fClass2 = classifier2.train()
+            write_data_to_disk(fileClassifiers2[i], fClass2)            
+            print "third classifier"
+            classifier3 = SC(data_expanded3, self.__labels3cNNEU, i+1)
+            fClass3 = classifier3.train()
+            write_data_to_disk(fileClassifiers3[i], fClass3)
                     
     def testClassifiersFirstStage(self, test_data):
         vectorizer = load_data_from_disk(allVectorizer)
@@ -345,18 +454,65 @@ class Manager(object):
         return all_labels
     
     def testClassifiersFirstStage3C(self, test_data):
-        pass
+        vectorizer = load_data_from_disk(allVectorizer3C)
+        transformer = load_data_from_disk(allVectorizerTFIDF3C)
+        model = VM()
+        model.set_models(vectorizer, transformer)    
+        
+        
+        reader = Reader(test_data, 3)
+        allDataTest = reader.read()
+        test_ids = allDataTest[0]
+        test_comments = allDataTest[1]                                
+        fileClassifiers = [allSVM3C, allNB3C, allME3C, allDT3C, allRF3C]        
+        true_labels = get_polarity_from_file(labeled3c)        
+        all_labels_predicted = []                            
+        for i in fileClassifiers:
+            supClass = load_data_from_disk(i)
+            classifier = SC()
+            classifier.set_classifier(supClass)
+            labels = []
+            #for j in range(len(true_labels)):
+            for j in range(len(test_comments)):
+                proc = TextCleaner(test_comments[j])
+                text_cleaned = proc.get_processed_comment()
+                vector = model.get_comment_tf_idf_vector([text_cleaned])
+                result = classifier.classify(vector)            
+                labels.append(result[0][0])
+            show_classification_report(true_labels, labels)
+            print "ok"            
+            all_labels_predicted.append(labels)
+       
+        fileResults = []
+        if len(test_ids)==1000:         
+            fileResults = [threeClassFirstResultsSVM1000, threeClassFirstResultsNB1000, threeClassFirstResultsME1000, threeClassFirstResultsDT1000, threeClassFirstResultsRF1000]
+        else:
+            fileResults = [threeClassFirstResultsSVM60000, threeClassFirstResultsNB60000, threeClassFirstResultsME60000, threeClassFirstResultsDT60000, threeClassFirstResultsRF60000]
+            
+        for i in range(len(fileResults)):
+            generate_resultsFile(fileResults[i], test_ids, all_labels_predicted[i])
+        return all_labels_predicted
     
     def testClassifiersSecondStage3C(self, test_data):
-        pass 
+        pass
+        
+         
     
                     
 if __name__ == '__main__':
     
     obj = Manager()  
     
+    '''
     obj.prepareModelsFirstStage3C()
     obj.trainClassifiersFirstStage3C()
+    obj.testClassifiersFirstStage3C(test1)
+    '''
+    
+    '''
+    obj.prepareModelsSecondStage3C()
+    obj.trainClassifiersSecondStage3C()
+    '''
     
     
           

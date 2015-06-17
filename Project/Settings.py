@@ -23,6 +23,8 @@ pcorpus_train1 = "Data/general-tweets-train-tagged-proccesed.xml"
 
 ''' corpus manual labeled'''
 labeled = "Data/manual-label-general-tweets-test1k.txt"
+labeled3c = "Data/manual-label-general-tweets-test1k3c.txt"
+
 labeled2 = "Data/manual-label-general-tweets-test1k-500.txt"
 labeled3 = "Data/manual-label-general-tweets-test1k-500_2.txt"
 
@@ -96,10 +98,10 @@ pneuDT = "Classifiers/p-neu/DT3C.pk1"
 pneuRF = "Classifiers/p-neu/RF3C.pk1"
 
 nneuSVM = "Classifiers/n-neu/SVM3C.pk1"
-nneuSVM = "Classifiers/n-neu/NB3C.pk1"
-nneuSVM = "Classifiers/n-neu/ME3C.pk1"
-nneuSVM = "Classifiers/n-neu/DT3C.pk1"
-nneuSVM = "Classifiers/n-neu/RF3C.pk1"
+nneuNB = "Classifiers/n-neu/NB3C.pk1"
+nneuME = "Classifiers/n-neu/ME3C.pk1"
+nneuDT = "Classifiers/n-neu/DT3C.pk1"
+nneuRF = "Classifiers/n-neu/RF3C.pk1"
 
 
 ''' results 4 classes'''
