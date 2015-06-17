@@ -7,10 +7,11 @@ Created on 2/6/2015
 
 import random
 from SupervisedManager import Manager
-from Settings import corpus_test1 as test1 , labeled2 , labeled
+from Settings import corpus_test1 as test1 , labeled2 , labeled , labeled3c
 from Utils import get_polarity_from_file , show_classification_report, generate_resultsFile
 from Settings import thirdResultsNaiveVoting1000 , thirdResultsNaiveVoting60000
 from XMLReader import Reader
+from Settings import threeClassThirdResultsNaiveVoting1000, threeClassThirdResultsNaiveVoting60000
 
 class VotingSystem(object):
     
@@ -107,49 +108,83 @@ class VotingSystem(object):
         return self.__predicted 
     
     def naiveVoting3C(self):
-        pass 
+        positives = []
+        negatives = []
+        neutral = []
+        
+        for i in range(len(self.__predictedSVM)):
+            positives.append(0)
+            negatives.append(0)
+            neutral.append(0)
+            
+        for i in range(len(self.__matrix)):
+            for j in range(len(self.__predictedSVM)):
+                if self.__matrix[i][j] == "P":
+                    positives[j]+=1
+                elif self.__matrix[i][j] == "N":
+                    negatives[j]+=1
+                elif self.__matrix[i][j] == "NEU":
+                    neutral[j]+=1
+                
+    
+        for i in range(len(positives)):
+            if positives[i]>=3:                
+                self.__predicted.append("P")
+            elif negatives[i]>=3:                
+                self.__predicted.append("N")
+            elif neutral[i]>=3:                
+                self.__predicted.append("NEU")            
+            elif positives[i]==1 and negatives[i]==1 and neutral[i]==1:      
+                self.__predicted.append("NEU")                                 
+            elif positives[i]==2 and negatives[i]==2:
+                flag = random.randrange(2)
+                if flag==0:                     
+                    self.__predicted.append("P")
+                if flag==1:                     
+                    self.__predicted.append("N")                
+            elif positives[i]==2 and neutral[i]==2:                
+                self.__predicted.append("NEU")            
+            elif negatives[i]==2 and neutral[i]==2:                
+                self.__predicted.append("NEU")            
+            elif positives[i]==2:                
+                self.__predicted.append("P")
+            elif negatives[i]==2:                
+                self.__predicted.append("N")
+            elif neutral[i]==2:                
+                self.__predicted.append("NEU")            
+            else:
+                print "Nose!"
+                print str(positives[i]) + " " + str(negatives[i]) + " " + str(neutral[i])
+        
+        
+        
+        
+        fileResults = ""
+        if len(self.__test_ids)==1000:        
+            fileResults = threeClassThirdResultsNaiveVoting1000 
+        else:
+            fileResults = threeClassThirdResultsNaiveVoting60000
+                    
+        generate_resultsFile(fileResults, self.__test_ids, self.__predicted)
+        
+                        
+        return self.__predicted 
             
     
-    def weightedVoting(self):
-        pass 
-
-
 if __name__ == '__main__':
     
-    '''
-    predictedSVM = ["P" , "P", "P",   "N",  "NEU", "NONE"]
-    predictedNB = ["N" , "P",  "N",   "P",  "NONE", "NEU"]
-    predictedME = ["P" , "N",  "NEU", "N",  "NEU", "P"]
-    predictedDT = ["P" , "N",  "P", " NONE", "NONE", "P"]   
-    predictedRF = ["P" , "N",  "P", " NONE", "NONE", "P"] 
-    trueLabels = ["P" , "P", "P", "N", "NEU", "NEU"]
-    '''
-    
     obj = Manager()
-    labels = obj.testClassifiersFirstStage(test1)
+    labels = obj.testClassifiersSecondStage3C(test1)
     predictedSVM = labels[0]
     predictedNB = labels[1]
     predictedME = labels[2]
     predictedDT = labels[3]
     predictedRF = labels[4]
-    trueLabels = get_polarity_from_file(labeled)
-    
-    show_classification_report(trueLabels, predictedSVM)
-    show_classification_report(trueLabels, predictedNB)
-    show_classification_report(trueLabels, predictedME)
-    show_classification_report(trueLabels, predictedDT)
-    show_classification_report(trueLabels, predictedRF)
-    
+    trueLabels = get_polarity_from_file(labeled3c)
     
     voting = VotingSystem(test1, predictedSVM, predictedNB, predictedME, predictedDT, predictedRF)
-    naive = voting.naiveVoting()
+    naive = voting.naiveVoting3C()
     show_classification_report(trueLabels, naive)
-    
-    
-    
-    
-    
-    
     
     
     #naive = obj.naiveVoting()
