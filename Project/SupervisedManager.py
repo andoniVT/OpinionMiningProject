@@ -26,6 +26,11 @@ from Settings import pnneuSVM, pnneuNB, pnneuME, pnneuDT, pnneuRF
 from Settings import firstResultsSVM1000 , firstResultsNB1000, firstResultsME1000, firstResultsDT1000, firstResultsRF1000
 from Settings import secondResultsSVM1000, secondResultsNB1000, secondResultsME1000, secondResultsDT1000, secondResultsRF1000  
 from Settings import firstResultsSVM60000, firstResultsNB60000, firstResultsME60000, firstResultsDT60000, firstResultsRF60000
+from Settings import secondResultsSVM60000, secondResultsNB60000, secondResultsME60000, secondResultsDT60000, secondResultsRF60000
+
+from Settings import allVectorizer3C, allVectorizerTFIDF3C, allModelTFIDF3C
+from Settings import allSVM3C, allNB3C, allME3C, allDT3C, allRF3C
+
 
 class Manager(object):
     
@@ -33,6 +38,10 @@ class Manager(object):
         self.__trainData = self.getTrainData()
         self.__labelsPNNEU = []
         self.__labelsPNEUNONE = []
+        self.__labels3cPNNEU = []
+        self.__labels3cPN = []
+        self.__labels3cPNEU = []
+        self.__labels3cNNEU = []
                                 
     def getTrainData(self):
         flag = os.path.isfile(ptrain1)
@@ -123,7 +132,25 @@ class Manager(object):
         write_data_to_disk(pnnoneModelTFIDF, modelTFIDF2)
     
     def prepareModelsFirstStage3C(self):
-        pass 
+        train_commentsP_N_NEU = []
+        
+        for i in self.__trainData:
+            if i[1]=="NONE":
+                train_commentsP_N_NEU.append(i[0])                                
+                self.__labels3cPNNEU.append("NEU")        
+            else :
+                train_commentsP_N_NEU.append(i[0])                
+                self.__labels3cPNNEU.append(i[1])
+                
+        model = VM(train_commentsP_N_NEU)
+        vectorModelData = model.prepare_models()
+        modelVectorizer = vectorModelData[0]
+        modelVectorizerTFIDF = vectorModelData[1]
+        modelTFIDF = vectorModelData[2]
+            
+        write_data_to_disk(allVectorizer3C, modelVectorizer)
+        write_data_to_disk(allVectorizerTFIDF3C, modelVectorizerTFIDF)
+        write_data_to_disk(allModelTFIDF3C, modelTFIDF) 
     
     def prepareModelsSecondStage3C(self):
         pass
@@ -171,8 +198,20 @@ class Manager(object):
             fClass2 = classifier2.train()
             write_data_to_disk(fileClassifiers2[i], fClass2)
     
-    def trainClassifiersFirstStage3C(self):
-        pass 
+    def trainClassifiersFirstStage3C(self):                
+        data = load_data_from_disk(allModelTFIDF3C)
+        data_expanded = []
+        for i in data:
+            vec =  expand(i)
+            data_expanded.append(vec)
+                             
+        labels = self.__labels3cPNNEU
+        fileClassifiers = [allSVM3C, allNB3C, allME3C, allDT3C, allRF3C]
+                
+        for i in range(5):            
+            classifier = SC(data_expanded, labels, i+1)
+            fClass = classifier.train()                                 
+            write_data_to_disk(fileClassifiers[i], fClass) 
     
     def trainClassifiersSecondStage3C(self):
         pass
@@ -299,7 +338,7 @@ class Manager(object):
         if len(test_ids)==1000:        
             fileResults = [secondResultsSVM1000, secondResultsNB1000, secondResultsME1000, secondResultsDT1000, secondResultsRF1000]
         else:
-            fileResults = [firstResultsSVM60000, firstResultsNB60000, firstResultsME60000, firstResultsDT60000, firstResultsRF60000]
+            fileResults = [secondResultsSVM60000, secondResultsNB60000, secondResultsME60000, secondResultsDT60000, secondResultsRF60000]
             
         for i in range(len(fileResults)):
             generate_resultsFile(fileResults[i], test_ids, all_labels[i])           
@@ -314,13 +353,20 @@ class Manager(object):
                     
 if __name__ == '__main__':
     
-    obj = Manager()        
-    #obj.testClassifiersFirstStage(test1)
+    obj = Manager()  
     
+    obj.prepareModelsFirstStage3C()
+    obj.trainClassifiersFirstStage3C()
+    
+    
+          
+    #obj.testClassifiersFirstStage(test1)
+    '''
     true_labels = get_polarity_from_file(labeled)
     labels =  obj.testClassifiersSecondStage(test1)
     for i in labels:
         show_classification_report(true_labels, i)
+    '''
     
         
     
