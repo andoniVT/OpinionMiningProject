@@ -59,17 +59,17 @@ class SentimentManager(object):
         predictedDT = labels[3]
         predictedRF = labels[4]        
         voting = VotingSystem(test_data, predictedSVM, predictedNB, predictedME, predictedDT, predictedRF)
-        naive = voting.naiveVoting3C()()  
+        naive = voting.naiveVoting3C()
     
 if __name__ == '__main__':
     
     obj = SentimentManager()
     
-    obj.testFirstStage(test60798)
-    obj.testSecondStage(test60798)
-    obj.testVotingSystemFS(test60798)
+    #obj.testFirstStage(test60798)
+    #obj.testSecondStage(test60798)
+    #obj.testVotingSystemFS(test60798)
     
-    obj.testFirstStage3classes(test60798)
-    obj.testSecondStage3classes(test60798)
+    #obj.testFirstStage3classes(test60798)
+    #obj.testSecondStage3classes(test60798)
     obj.testVotingSystem3classes(test60798)
     

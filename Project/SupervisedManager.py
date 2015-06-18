@@ -370,7 +370,7 @@ class Manager(object):
                 vector = model.get_comment_tf_idf_vector([text_cleaned])
                 result = classifier.classify(vector)            
                 labels.append(result[0][0])
-            show_classification_report(true_labels, labels)
+            #show_classification_report(true_labels, labels)
             print "ok"            
             all_labels_predicted.append(labels)
        
