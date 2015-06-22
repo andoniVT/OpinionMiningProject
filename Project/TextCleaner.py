@@ -160,7 +160,8 @@ class TextCleaner(object):
             return "None!"
         else:
             comentario = re.sub('\W+',' ', result)
-            return self.lemmatized_comment(comentario)            
+            #return self.lemmatized_comment(comentario)            
+            return comentario
                 
     def remove_punctuation_marks(self , word):
         """ Elimina los signos de puntuacion de un texto """

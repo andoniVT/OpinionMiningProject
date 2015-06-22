@@ -10,8 +10,12 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
 import elementtree.ElementTree as ET
 from Settings import corpus_train1 as train1 , labeled3
-
+from Settings import sentiment_words , stop_words
+from Settings import corpus_test1 as test1000 , corpus_test2 as test60798
+from XMLReader import Reader
 testFile = "testFile.txt"
+from TextCleaner import TextCleaner
+import operator
 
 def compress(vector):
     result = {}
@@ -147,11 +151,68 @@ def generate_resultsFile(file,ids, labels):
     for i in range(len(ids)):
         line = ids[i] + "\t" + labels[i] + "\n"
         file_to_write.write(line)
+
+def read_sentiments_words():
+    file = open(sentiment_words, 'r')
+    sentiments = []
+    for i in file:
+        i = i.strip()
+        sentiments.append(i)
+    return sentiments 
+
+def hasSentiments(sentence):
+    sentimentList = read_sentiments_words()
+    list_sentence = sentence.split()
+    for i in list_sentence:
+        if i in sentimentList:
+            return True
+    return False
+
+def getStopWords():
+    arch = open(stop_words , 'r')
+    stops = []
+    for line in arch:
+        word = line.strip()
+        stops.append(word)
+    return stops
+
+def getAllWords():
+    reader = Reader(test60798, 3)
+    allDataTest = reader.read()        
+    test_comments = allDataTest[1]
+    result = {}
+    
+    
+    for i in test_comments:
+        obj = TextCleaner(i)
+        words = (obj.get_processed_comment()).split()
+        for i in words:
+            if len(i) > 3 and len(i) <= 10: 
+                if result.has_key(i):
+                    value = result.get(i) + 1
+                    result[i] = value
+                else:
+                    result[i] = 1
+    
+    sorted_x = sorted(result.items(), key=operator.itemgetter(1))
+    for i in sorted_x:
+        print i 
+    
+    print len(sorted_x)
+                 
+              
+        
+        
+        
+        
+    
     
 if __name__ == '__main__':
     
-    file = "testFile.txt"
-    ids = ["123" , "456", "789"]
-    labels = ["P" , "P", "N"]
-    generate_resultsFile(file, ids, labels)
+ 
     
+    getAllWords()
+    
+ 
+    
+     

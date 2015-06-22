@@ -7,6 +7,7 @@ Created on 15/5/2015
 '''resource '''
 big_text =  'Resource/big2.txt'
 stop_words = 'Resource/stopwords_spanish.txt'
+sentiment_words = 'Resource/sentiment_words.txt'
 
 ''' original corpus '''
 corpus_train1 = "Data/general-tweets-train-tagged.xml"
@@ -60,6 +61,12 @@ nneuVectorizerTFIDF3C = "Models/n-neu/tfidfVectorizer3C.pk1"
 nneuModelTFIDF3C = "Models/n-neu/tfidfModel3C.pk1"
 
 
+
+allVectorizerA = "Models/all/simpleVectorizerA.pk1"
+allVectorizerTFIDFA = "Models/all/tfidfVectorizerA.pk1"
+allModelTFIDFA = "Models/all/tfidfModelA.pk1"
+
+
 ''' classifiers '''
 allSVM = "Classifiers/all/SVM.pk1"
 allNB = "Classifiers/all/NB.pk1"
@@ -103,6 +110,12 @@ nneuME = "Classifiers/n-neu/ME3C.pk1"
 nneuDT = "Classifiers/n-neu/DT3C.pk1"
 nneuRF = "Classifiers/n-neu/RF3C.pk1"
 
+
+allSVMA = "Classifiers/all/SVM_a.pk1"
+allNBA = "Classifiers/all/NB_a.pk1"
+allMEA = "Classifiers/all/ME_a.pk1"
+allDTA = "Classifiers/all/DT_a.pk1"
+allRFA = "Classifiers/all/RF_a.pk1"
 
 ''' results 4 classes'''
 firstResultsSVM1000 = "Results/results_4classes/firstStage/run1-testSVM1000.txt"
