@@ -17,6 +17,8 @@ testFile = "testFile.txt"
 from TextCleaner import TextCleaner
 import operator
 
+
+
 def compress(vector):
     result = {}
     pos = 0 
