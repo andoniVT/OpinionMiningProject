@@ -31,6 +31,12 @@ labeled3 = "Data/manual-label-general-tweets-test1k-500_2.txt"
 
 
 ''' vector model '''
+allFullVectorizer = "Models/full-classes/simpleVectorizer.pk1"
+allFullVectorizerTFIDF = "Models/full-classes/tfidfVectorizer.pk1"
+allFullModelTFIDF = "Models/full-classes/tfidfModel.pk1"
+
+
+
 allVectorizer = "Models/all/simpleVectorizer.pk1"
 allVectorizerTFIDF = "Models/all/tfidfVectorizer.pk1"
 allModelTFIDF = "Models/all/tfidfModel.pk1"
@@ -74,6 +80,13 @@ allME = "Classifiers/all/ME.pk1"
 allDT = "Classifiers/all/DT.pk1"
 allRF = "Classifiers/all/RF.pk1"
 
+allFullSVM = "Classifiers/full-classes/SVM.pk1"
+allFullNB = "Classifiers/full-classes/NB.pk1"
+allFullME = "Classifiers/full-classes/ME.pk1"
+allFullDT = "Classifiers/full-classes/DT.pk1"
+allFullRF = "Classifiers/full-classes/RF.pk1"
+
+
 pnneuSVM = "Classifiers/p-n-neu/SVM.pk1"
 pnneuNB = "Classifiers/p-n-neu/NB.pk1"
 pnneuME = "Classifiers/p-n-neu/ME.pk1"
@@ -116,6 +129,22 @@ allNBA = "Classifiers/all/NB_a.pk1"
 allMEA = "Classifiers/all/ME_a.pk1"
 allDTA = "Classifiers/all/DT_a.pk1"
 allRFA = "Classifiers/all/RF_a.pk1"
+
+
+''' results full '''
+resultsSVM1000 = "Results/results_full/run1-testSVM1000.txt"
+resultsNB1000 = "Results/results_full/run1-testNB1000.txt"
+resultsMEM1000 = "Results/results_full/run1-testME1000.txt"
+resultsDTM1000 = "Results/results_full/run1-testDTM1000.txt"
+resultsRFM1000 = "Results/results_full/run1-testRF1000.txt"
+
+resultsSVM60000 = "Results/results_full/run1-testSVM60000.txt"
+resultsNB60000 = "Results/results_full/run1-testNB60000.txt"
+resultsMEM60000 = "Results/results_full/run1-testME60000.txt"
+resultsDTM60000 = "Results/results_full/run1-testDTM60000.txt"
+resultsRFM60000 = "Results/results_full/run1-testRF60000.txt"
+
+
 
 ''' results 4 classes'''
 firstResultsSVM1000 = "Results/results_4classes/firstStage/run1-testSVM1000.txt"

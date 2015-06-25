@@ -16,7 +16,7 @@ from XMLReader import Reader
 testFile = "testFile.txt"
 from TextCleaner import TextCleaner
 import operator
-
+import snowballstemmer
 
 
 def compress(vector):
@@ -201,19 +201,49 @@ def getAllWords():
         print i 
     
     print len(sorted_x)
+    
+
+def getPalabras():
+    file = "dicc.txt"
+
+    arc = open(file, 'r')
+    stemmer = snowballstemmer.stemmer('spanish');
+         
+    
+    words = {}
+    for i in arc:
+        i = i.rstrip()
+        i = stemmer.stemWord(i)
+        words[i] = "word"
+    
+    for i in words.items():
+        print i
+    
+    print len(words) 
+
+def ultima():
+    file = "diccionario.txt"
+    words = {}
+    arc = open(file, 'r')
+    for i in arc:
+        i = i.rstrip()
+        words[i] = "word"
+    
+    for i in words.items():
+        print i 
+    
+    print len(words)
+    
                  
               
         
-        
-        
-        
-    
-    
 if __name__ == '__main__':
+    
+    ultima()
     
  
     
-    getAllWords()
+    #getAllWords()
     
  
     
