@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 '''
 Created on 22/5/2015
 @author: Jorge Andoni Valverde Tohalino
@@ -10,7 +12,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
 import elementtree.ElementTree as ET
 from Settings import corpus_train1 as train1 , labeled3
-from Settings import sentiment_words , stop_words
+from Settings import sentiment_words , stop_words , positive_emoticons, negative_emoticons
 from Settings import corpus_test1 as test1000 , corpus_test2 as test60798
 from XMLReader import Reader
 testFile = "testFile.txt"
@@ -234,13 +236,52 @@ def ultima():
     
     print len(words)
     
+
+def get_emoticon_list(file):
+    arc = open(file)
+    words = []
+    for i in arc:
+        i = i.rstrip()
+        words.append(i)
+    
+    return words 
+
+def contain_emoticon(sentence):
+    positives = get_emoticon_list(positive_emoticons)
+    negatives = get_emoticon_list(negative_emoticons)
+    
+    npositives = 0
+    nnegatives = 0
+    
+    
+    word_list = sentence.split()
+    for i in word_list:
+        if i in positives:
+            npositives+=1
+        elif i in negatives:
+            nnegatives+=1
+    
+    #print npositives
+    #print nnegatives
+    
+    if npositives !=0 or nnegatives !=0:
+        if npositives>nnegatives:
+            return 1
+        else:
+            return -1
+    else:
+        return 0
+    
+    
                  
               
         
 if __name__ == '__main__':
     
-    ultima()
+    sentence = "La felicidad no esta en los grandes anhelos , sino con pequeñas cosas que ocurren todos los días. Buenas noches , mañana mas ;-("
     
+    
+    print contain_emoticon(sentence)
  
     
     #getAllWords()

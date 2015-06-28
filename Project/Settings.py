@@ -9,6 +9,10 @@ big_text =  'Resource/big2.txt'
 stop_words = 'Resource/stopwords_spanish.txt'
 sentiment_words = 'Resource/sentiment_words.txt'
 
+positive_emoticons = 'Resource/positives.txt'
+negative_emoticons = 'Resource/negatives.txt'
+
+
 ''' original corpus '''
 corpus_train1 = "Data/general-tweets-train-tagged.xml"
 corpus_train1a =  "Data/nuevoTrainPrueba.xml"
